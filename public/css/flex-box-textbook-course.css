@@ -1,0 +1,31 @@
+        .search-result-div-2 {
+            margin: auto;
+            justify-content: space-between;
+            padding: 20px;
+            box-sizing: border-box;
+            flex: 0 0 500px;
+        }
+        .detail-info-2{
+            border-style: solid;
+            border-width: medium;
+            margin: auto;
+            justify-content: space-between;
+/*            padding: 20px;*/
+            /*flex-wrap: wrap;*/
+            display:flex;
+            flex-direction:column;
+            
+        }
+
+        .course_id {
+            /*flex:2;*/
+            flex-basis: 20%;
+            display: inline-block;
+            vertical-align: top;
+        }
+        .course_detail {
+            /*flex:1;*/
+            flex-basis: 80%;
+            display: inline-block;
+            vertical-align: bottom;
+        }

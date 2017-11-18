@@ -1,0 +1,42 @@
+form.search-bar{
+    font-size:0;
+    }
+input.search-bar{
+  height: 40px;
+  width:100px;
+  background-color: #eee;
+  border: none;
+  border-radius: 4px 0 0 4px;
+  padding-left: 10px;
+}
+button.search-bar{
+  height: 40px;
+  width: 60px;
+  background-color: #33ABDF;
+  border: none;
+  position: relative;
+  border-radius: 0 4px 4px 0;
+  color: #fff;
+  font-weight: bold;
+  /*outline: none;*/
+  cursor: pointer;
+  outline:none;
+}
+input.search-bar::-webkit-input-placeholder{
+  font-style: italic;
+}
+input.search-bar:-moz-placeholder{
+  font-style: italic;
+}
+input.search-bar:-ms-input-placeholder{
+  font-style: italic;
+}
+button.search-bar:before{
+  content: "";
+  display: inline-block;
+  border: 6px solid transparent;
+  border-right-color:#33ABDF;
+  position: absolute;
+  right:100%;
+  top:14px;
+}

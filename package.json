@@ -1,0 +1,24 @@
+{
+  "name": "assignment-3-nan-nan",
+  "version": "1.0.0",
+  "description": "<style> main {font-size: 1.5em;} li {margin-bottom: 10px;} </style> <main> <h1>Assignment 3</h1> <h2>Final Project</h2>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FallCSC309/assignment-3-nan-nan.git"
+  },
+  "author": "haotianyin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FallCSC309/assignment-3-nan-nan/issues"
+  },
+  "homepage": "https://github.com/FallCSC309/assignment-3-nan-nan#readme",
+  "dependencies": {
+    "cobalt-uoft": "^0.6.2",
+    "express": "^4.16.2",
+    "request": "^2.83.0"
+  }
+}
