@@ -33,8 +33,6 @@ router.get('/food', function(req, res) {
 
     request.get('https://cobalt.qas.im/api/1.0/food?limit=100' + '&key=' + API_KEY, function(err, _res, body) {
         data = JSON.parse(body)
-        console.log(res)
-        console.log(data)
         res.send(data)
     })
 })
@@ -44,8 +42,6 @@ router.get('/buildings', function(req, res) {
 
     request.get('https://cobalt.qas.im/api/1.0/buildings?limit=100' + '&key=' + API_KEY, function(err, _res, body) {
         data = JSON.parse(body)
-        console.log(res)
-        console.log(data)
         res.send(data)
     })
 })
@@ -55,8 +51,6 @@ router.get('/parking', function(req, res) {
 
     request.get('https://cobalt.qas.im/api/1.0/transportation/parking?limit=100' + '&key=' + API_KEY, function(err, _res, body) {
         data = JSON.parse(body)
-        console.log(res)
-        console.log(data)
         res.send(data)
     })
 })
@@ -76,30 +70,3 @@ router.use(function(req, res, next) {
 });
 
 module.exports = router
-
-
-const db = (function() {
-    let database = {
-        'CSC309': {
-            id: 'CSC309',
-            when: new Date(),
-            what: 'Programming on the Web',
-            who: 'Gonzalez'
-        }
-    };
-
-    return { // public interface to the DB layer
-        findAll: function() {
-            return database
-        },
-        findOne: function(i) {
-            return database[i]
-        },
-        add: function(r) {
-            database[r.id] = r
-        },
-        remove: function(i) {
-            delete database[i]
-        }
-    };
-})();
