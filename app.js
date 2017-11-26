@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var router = require('./routes/route')
+var location_router = require('./routes/location')
 var swig = require('swig');
 
 const PORT = process.env.PORT || 3000;
@@ -9,6 +10,9 @@ const PORT = process.env.PORT || 3000;
 // When user start with public, then return the file in __dirname + '/public'
 // eg. 127.0.0.1:3000/public/css/food.css
 app.use('/public',express.static(__dirname + '/public') );
+app.use('/site', router)
+app.use('/location', location_router)
+
 
 
 app.engine('html',swig.renderFile);
@@ -23,6 +27,8 @@ app.set('view engine','html');
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
+swig.setDefaults({cache:false});
+
 
 app.get('/',function(req, res) {
     // res.send('<h1>欢迎光临我的博客！</h1>');
@@ -32,7 +38,6 @@ app.get('/',function(req, res) {
 });
 
 
-app.use('/site', router)
 
 
 

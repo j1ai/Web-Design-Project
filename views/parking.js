@@ -7,7 +7,7 @@ var cityList = new Array(10000);
     function createMarkers(){
             $.ajax({
                 type:'GET',
-                url: 'http://127.0.0.1:3000/location/parking',
+                url: '/location/parking',
                 success:function(data){
                     $.each(data,function(i,item){
                         cityList[i][0] = item.title;
@@ -38,9 +38,10 @@ var cityList = new Array(10000);
 
     function initialize()
             {
-                createMarkers();
+                console.log("yes")
+                createMarkers(); 
                  $(window).on('load', function () {
-                demoCenter = new google.maps.LatLng(43.66333,-79.40032);
+                demoCenter = new google.maps.LatLng(cityList[0][1],cityList[0][2]);
                 map = new google.maps.Map(document.getElementById('map_canvas'), {
                    zoom: 15,
                    center: demoCenter,
@@ -81,6 +82,9 @@ var cityList = new Array(10000);
                 }
             }
 
+            $(document).ready(function() {
+                initialize();
+            });
 
             $(document).on('click', '.add-markers', function(e) {
                 e.preventDefault();

@@ -2,7 +2,7 @@
 function getFood(){
     $.ajax({
         type:'GET',
-        url: 'http://127.0.0.1:3000/dataset/food.json',
+        url: '/location/food',
         success:function(data){
             // similar to enumerate in python
             $('.foodBracket').empty();

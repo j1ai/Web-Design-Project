@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html>
-<script src = js/jquery-ui.min.js></script>
-<script src=js/jquery-3.2.1.js></script>
-<script src = js/jquery-3.2.1.min.js></script>
 
-<script src = js/search_course.js></script>
-<script src = js/search_textbook.js></script>
-<script src = js/lodash.core.js></script>
+<script src= ../public/js/jquery-3.2.1.js></script>
+<script src = ../public/js/jquery-3.2.1.min.js></script>
+<script src = ../public/js/jquery-ui.min.js></script>
+
+<script src = ../public/js/search_course.js></script>
+<script src = ../public/js/search_textbook.js></script>
+<script src = ../public/js/lodash.core.js></script>
 <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 <script type="text/javascript" async defer src="http://maps.googleapis.com/maps/api/js?&key=AIzaSyAcCQUysA9ta6bOvWOUxTyPdsXx40X9jkw&callback=initialize"
 >
 </script>
-<script src='js/parking.js'></script>
-
-<link rel = "stylesheet" type= "text/css" href= "css/food.css"/>
+<script src='../public/js/parking.js'></script>
+<link rel = "stylesheet" type= "text/css" href= "../public/css/food.css"/>
 
 <head>
  <link rel = "stylesheet"
    type = "text/css"
-   href = "css/searchbar.css" />
-<link rel="stylesheet" type="text/css" href="css/flex-box-textbook-course.css">
+   href = "../public/css/searchbar.css" />
+<link rel="stylesheet" type="text/css" href="../public/css/flex-box-textbook-course.css">
 
 <style>
     * {
@@ -27,7 +27,7 @@
       }
     @font-face {
         font-family: 'Orbitron-Black';
-        src: url('fonts/Orbitron/Orbitron-Black.ttf');
+        src: url('../public/fonts/Orbitron/Orbitron-Black.ttf');
     }
 /*    mobile*/
     @media only screen{
@@ -35,7 +35,6 @@
             position: absolute;
             width: 480px;
         }
-
         div.diff-view {
 /*
             margin-left: 253px;
@@ -66,21 +65,17 @@
             border-width: 1px;
             border-color: #263752;
         }
-
         button.accordion.active{
             background-color: #FFFFFF;
             color: #3BAEE0;
         }
-
         button.accordion:hover {
             //background-color: #FFFFFF;
             color: #8FD1ED;
         }
-
         div.dropdown-panel {
             padding: 0 18px;
 /*            padding: 0 1px;*/
-
             background-color: #071831;
             max-height: 0px;
             overflow: hidden;
@@ -88,7 +83,6 @@
             color:aliceblue
         }
     }
-
     .menu {
         position: absolute;
         /* top: 50%; */
@@ -96,10 +90,7 @@
         /* right: 30%; */
         transform: translate(-50%);
     }
-
-
     /*Text*/
-
     h2.title {
 /*        font-family: 'Rozha One', serif;*/
         font-family: 'Orbitron-Black';
@@ -109,7 +100,7 @@
     }
 </style>
 
-<link rel = "stylesheet" type = "text/css" href = "css/nav_bar.css" />
+<link rel = "stylesheet" type = "text/css" href = "../public/css/nav_bar.css" />
 
 </head>
 
@@ -178,7 +169,7 @@
         <div id="basic-map">
                 <a onMouseOver="this.style.color='#3BAEE0'"  onMouseOut="this.style.color='white'" style="color:white" href="#" class="add-markers">Show Parking Spot</a>
 
-                <div id="map_canvas" style="height:400px; border-color: #354C71; width:400px;"></div>
+                <div id="map_canvas" style="height:400px;  width:500px; border-color: #354C71;"></div>
             </div>      
     </div>
 </div>
@@ -198,65 +189,46 @@
     //meida only
     $(window).on('load resize',
         function(){
-
-
               /* the viewport is less than 500 pixels wide */
                 $('.tobe-accordion').addClass('accordion');
                 $('.tobe-accordion').prop("click", null);
                 $('.tobe-accordion').off('click');
                 var $acc = $(".tobe-accordion");
                 var i;
-
                 $acc.each(
                     function(){
                         $(this).click(function() {
                             $('.accordion.active').next().css('max-height', "0px");  $('.accordion.active').removeClass("active");
-
                             $(this).toggleClass("active");
                             var $panel = $(this).next();
                             if ($panel.css('max-height') != '0px'){
                                 $panel.css('max-height', '0px');
-
                             } else {
                                 $panel.css('max-height', $panel.prop("scrollHeight") + "px");
                                 if ( $(this)[0].id== 'button-3'){
                                     getFood();
                                 }
                             }
-
                     });
                 });
-
         }
     );
-
-
         function getIdx(data, course_code){
-
           for(var x in data){
-
             if(data[x]['courses'][0]['code'] == course_code) return x;
           }
-
           return "Not Found";
-
         }
-
         function getCourseIdx(data, course_code){
-
           for(var x in data){
-
             if(data[x]['code']== course_code) return x;
           }
-
           return "Not Found";
-
         }
-
         $("#search-textbook").on('click', function(e){
             $.ajax({
                 type: 'GET',
-                url :'http://127.0.0.1:3000/dataset/textbooks.json',
+                url :'http://127.0.0.1:3000/site/textbook',
                 dataType: 'json',
                 success:function(data){
                     var textbook_data = data;
@@ -278,25 +250,20 @@
                     $('#search-result-div-2').append('<h4></h4>');
                     $active_panel = $('.accordion.active').next();
                     $active_panel.css('max-height', $active_panel.prop("scrollHeight") + "px");
-
                 }
-
             })
             .catch(err => {
               console.log(err);
               alert('Failure of getting data');
             })
         });
-
         $("#search-course").on('click', function(e){
             $.ajax({
                 type: 'GET',
-                url :'http://127.0.0.1:3000/dataset/courses.json',
+                url :'http://127.0.0.1:3000/site/course',
                 dataType: 'json',
                 success:function(data){
                     var textbook_data = data;
-
-
                     var course_code = $('#search-input-1')[0].value;
                     var idx = getCourseIdx(textbook_data, course_code);
 //                    ""ANT370H5F""
@@ -311,20 +278,17 @@
                     $('#search-result-div-1').append('<h4></h4>');
                     $active_panel = $('.accordion.active').next();
                     $active_panel.css('max-height', $active_panel.prop("scrollHeight") + "px");
-
                 }
-
             })
             .catch(err => {
               console.log(err);
               alert('Failure of getting data');
             })
         });
-
 function getFood(){
         $.ajax({
             type:'GET',
-            url: 'http://127.0.0.1:3000/dataset/food.json',
+            url: 'http://127.0.0.1:3000/location/food',
             success:function(data){
                 // similar to enumerate in python
                 $('.foodBracket').empty();
@@ -339,7 +303,6 @@ function getFood(){
                                 + item.name + '<img src="' + item.image + '" width=100%>' + '</div>')
                         }
                         $("#foodblock" + i).append('<div class="foodpanel" id="food'+ i +'">')
-
                         $("#food"+i).append('<p>' + '<Strong>Associated Building: <a href = "http://map.utoronto.ca/building/' + item.building_id + '">'+ item.address + '</a>' + '</p>')
                         $("#food" + i).append('<h3>Hours</h3>')
                         $("#food" + i).append('<table class="access_table'+i+'">')
@@ -350,8 +313,6 @@ function getFood(){
                             '<th>Wed</th>' + '<th>Thu</th>' +
                             '<th>Fri</th>' + '<th>Sat</th>' +
                             '</tr>' + '</thread>')
-
-
                         $(".access_table"+i).append('<tbody>' + '<tr id="tr'+i+'">' +
                             '</tr>' + '</tbody>')
                         $.each(item.hours, function(j, day){
@@ -362,7 +323,6 @@ function getFood(){
                                         ' am - <br>' + ((day.close/3600)-12)+' pm</td>')
                                 }
                             })
-
                         $("#food"+ i).append("</table>")
                         // $("#food"+i).append('<p>'+ item.description + '</p>')
                         $("#foodblock"+i).append('</div>')
@@ -370,15 +330,12 @@ function getFood(){
                         $active_panel = $('.accordion.active').next();
                         $active_panel.css('max-height', $active_panel.prop("scrollHeight") + "px");
                     }
-
                 })
             },
             error:function(jqXHR, textStatus, errorThrown){
             }
         });
 }
-
-
 </script>
 
 
