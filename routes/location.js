@@ -44,9 +44,6 @@ router.use(express.static('public'))
 
 // RESTful Routes
 
-
-
-
 // 404 Error Handler
 router.use(function(req, res, next) {
   res.status(404).send('Error 404, Sorry cant find that!');

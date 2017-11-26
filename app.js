@@ -80,7 +80,7 @@ app.use('/', router)
 
 
 var port = 3000;
-var uri = 'http://localhost:' + port;
+var uri = 'http://127.0.0.1:' + port;
 
 // Connect mongo and Start the server
 mongoose.connect('mongodb://localhost:27017/app',function (err) {
