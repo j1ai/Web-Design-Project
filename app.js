@@ -2,6 +2,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const router = require('./routes/route')
 const router_user = require('./routes/user')
+const router_location = require('./routes/location')
 const swig = require('swig');
 const opn = require('opn');
 const bodyParser = require('body-parser');
@@ -46,12 +47,12 @@ app.use(cookieParser("Haotian Yin's Key"))
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
-// app.get('/',function(req, res) {
-//     // res.send('<h1>欢迎光临我的博客！</h1>');
-//     // 第一个参数：表示模板文件，相对于view文件夹而言的index文件
-//     // 第二个参数:传递个模板使用的数据
-//     res.render('index.html');
-// });
+app.get('/',function(req, res) {
+    // res.send('<h1>欢迎光临我的博客！</h1>');
+    // 第一个参数：表示模板文件，相对于view文件夹而言的index文件
+    // 第二个参数:传递个模板使用的数据
+    res.render('index.html');
+});
 
 function myLogger(req, res, next) {
     // console.log(moment().format(), 'Log:', req.method, req.url, req.body)
@@ -69,9 +70,10 @@ function myLogger(req, res, next) {
 
 // middleware that is specific to this router
 app.use(myLogger)
+app.use('/location', router_location)
 app.use('/user', router_user)
 app.use('/', router)
-app.use('/location', location_router)
+
 
 
 

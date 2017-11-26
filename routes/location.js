@@ -3,23 +3,6 @@ const router = express.Router()
 const request = require('request')
 
 
-function myLogger(req, res, next) {
-    console.log(Date.now(), 'LOG:', req.method, req.url, req.body)
-
-
-    // console.log("Raw Cookies: ",req.headers.cookie)
-    // console.log("Cookie Parser: ",req.cookies)
-    // console.log("Signed Cookies: ",req.signedCookies)
-    // if (req.body) {
-    //     console.log('LOG:', req.method, req.url, req.body)
-    // }
-    // res.append('Set-Cookie', 'lastPage='+req.url);
-    next()
-}
-
-// middleware that is specific to this router
-router.use(myLogger)
-
 // define the home page route
 router.get('/', function(req, res) {
     res.send('Home page')
