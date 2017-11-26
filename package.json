@@ -18,10 +18,14 @@
   "homepage": "https://github.com/FallCSC309/assignment-3-nan-nan#readme",
   "dependencies": {
     "cobalt-uoft": "^0.6.2",
+    "cookie-parser": "^1.4.3",
     "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "moment": "^2.19.2",
     "mongodb": "^2.2.33",
     "mongoose": "^4.13.5",
     "mongoskin": "^2.1.0",
+    "opn": "^5.1.0",
     "request": "^2.83.0",
     "swig": "^1.4.2"
   }
