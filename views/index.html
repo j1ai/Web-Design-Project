@@ -167,8 +167,14 @@
     <button id = "button-4" class="tobe-accordion">PARKING</button>
     <div id = "dropdown-panel-4" class="dropdown-panel">
         <div id="basic-map">
-                <a onMouseOver="this.style.color='#3BAEE0'"  onMouseOut="this.style.color='white'" style="color:white" href="#" class="add-markers">Show Parking Spot</a>
+                <a onMouseOver="this.style.color='#3BAEE0'"  onMouseOut="this.style.color='white'" style="color:white" href="#" class="add-park-markers">Show Parking Spot</a>
+                <a onMouseOver="this.style.color='#3BAEE0'"  onMouseOut="this.style.color='white'" style="color:white" href="#" class="add-food-markers">Show Food Spot</a>
+                <h3>Searching For A Building ?</h3>
 
+                <input type="search" id="mySearch" placeholder="Search for something..">
+                <button onclick="SearchMap()">Try it</button>
+
+                <p id="searchbuilding"></p>
                 <div id="map_canvas" style="height:400px;  width:500px; border-color: #354C71;"></div>
             </div>      
     </div>

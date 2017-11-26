@@ -20,7 +20,7 @@ router.get('/food', function(req, res) {
     })
 })
 
-router.get('/buildings', function(req, res) {
+router.get('/building', function(req, res) {
     API_KEY = 'vXTvfn2nefMuprAfim9GP9kRBEU4aN0v'
 
     request.get('https://cobalt.qas.im/api/1.0/buildings?limit=100' + '&key=' + API_KEY, function(err, _res, body) {
@@ -37,6 +37,7 @@ router.get('/parking', function(req, res) {
         res.send(data)
     })
 })
+
 
 
 router.use(express.static('public'))
