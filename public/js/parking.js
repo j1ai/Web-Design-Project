@@ -200,9 +200,10 @@ function addFoodMarkers(){
                     position: new google.maps.LatLng(buildList[i][1], buildList[i][2]),
                     map: map,
                     title: cityList[i][0],
-                    demoCenter = new google.maps.LatLng(buildList[i][1],buildList[i][2]),
-                    zoom = 17
+                    center: new google.maps.LatLng(buildList[i][1], buildList[i][2]),
+                    zoom: 17
                 });
+                map.setCenter(marker.getPosition());
 
                 
 
