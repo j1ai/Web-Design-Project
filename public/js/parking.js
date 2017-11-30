@@ -1,17 +1,21 @@
 var cityList = new Array(101);
 for (i=0; i <10000; i++){
-    cityList[i]=new Array(6);
+    cityList[i]=new Array(7);
 }
 var foodList = new Array(101);
 for (i=0; i <10000; i++){
-    foodList[i]=new Array(6);
+    foodList[i]=new Array(7);
 }
 var buildList = new Array(101);
 for (i=0; i <10000; i++){
-    buildList[i]=new Array(6);
+    buildList[i]=new Array(7);
 }
 var map;
 var demoCenter;
+var favList = new Array(101);
+for (i=0; i <10000; i++){
+    favList[i]=new Array(7);
+}
 
 function createMarkers(){
     $.ajax({
@@ -131,20 +135,25 @@ function addParkMarkers(){
             title: cityList[i][0]
         });
 
-        
 
+        
         google.maps.event.addListener(marker, 'click', (function(marker, i) {
             return function() {
-                var content = '<div style="color:#071931" class="panel" id="parking'+ i +'">' +
+
+        var content = '<div style="color:#071931" class="panel" id="parking'+ i +'">' +
         '<dd>' + "<Strong>"+ cityList[i][0]+ "</Strong>" + '</dd>' +
         '<dd>' + "<Strong>Address: </Strong>" + cityList[i][3] + '</dd>' +
-        '<dd>' + cityList[i][4]+ '</dd>' + '</div>';
+        '<dd>' + cityList[i][4]+ '</dd>' + '<input type = "button" value = "Add Favourite" onclick="SaveData()" />'+'</div>';
+
+        cityList[i][6] = content;
                 infowindow.setContent(content);
                 infowindow.open(map, marker);
             }
         })(marker, i));
     }
 }
+
+function SaveData()
 
 
 function addFoodMarkers(){
@@ -163,14 +172,17 @@ function addFoodMarkers(){
             title: foodList[i][0]
         });
 
+        var content = '<div style="color:#071931" class="panel" id="food'+ i +'">' +
+        '<dd>' + "<Strong>"+ foodList[i][0]+ "</Strong>" + '</dd>' +
+        '<dd>' + "<Strong>Address: </Strong>" + foodList[i][3] + '</dd>' +
+        '<dd>' + foodList[i][4]+ '</dd>' + '</div>';
+
+        foodList[i][6] = content;
         
 
         google.maps.event.addListener(marker, 'click', (function(marker, i) {
             return function() {
-                var content = '<div style="color:#071931" class="panel" id="food'+ i +'">' +
-        '<dd>' + "<Strong>"+ foodList[i][0]+ "</Strong>" + '</dd>' +
-        '<dd>' + "<Strong>Address: </Strong>" + foodList[i][3] + '</dd>' +
-        '<dd>' + foodList[i][4]+ '</dd>' + '</div>';
+
                 infowindow.setContent(content);
                 infowindow.open(map, marker);
             }
@@ -205,16 +217,18 @@ function addFoodMarkers(){
                 });
                 map.setCenter(marker.getPosition());
 
-                
-
-                google.maps.event.addListener(marker, 'click', (function(marker, i) {
-                    return function() {
-                        var content = '<div class="panel" style="color:black" id="parking'+ i +'">' +
+                var content = '<div class="panel" style="color:black" id="parking'+ i +'">' +
                 '<dd>' + "<Strong>"+ buildList[i][0]+ "</Strong>" + '</dd>' +
                 '<p>' + "<Strong>Address: </Strong>" + '<br />' +"Street:" +buildList[i][3][0] +
                 '<br />' +"City:" +buildList[i][3][1]+ 
                 '<br />' +"Postal Code:" +buildList[i][3][2]+'</p>' +
                 '<dd>' + buildList[i][4]+ '</dd>' + '</div>';
+
+                buildList[i][6] = content;
+
+                google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                    return function() {
+
                         infowindow.setContent(content);
                         infowindow.open(map, marker);
                     }
