@@ -6,95 +6,13 @@
     <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="/public/css/user.css">
-    <link rel="stylesheet" type="text/css" href="../public/css/food.css" />
-    <link rel="stylesheet" type="text/css" href="../public/css/searchbar.css" />
-    <link rel="stylesheet" type="text/css" href="../public/css/flex-box-textbook-course.css">
-    <style>
-        * {
-            font-family: calibri;
-        }
 
-        @font-face {
-            font-family: 'Orbitron-Black';
-            src: url('../public/fonts/Orbitron/Orbitron-Black.ttf');
-        }
-
-        /*    mobile*/
-
-        @media only screen {
-            div.menu {
-                position: absolute;
-                width: 480px;
-            }
-            div.diff-view {
-                /*
-            margin-left: 253px;
-            background-color:transparent;
-            border-left-style: solid;
-            border-color:#FFFFFF;
-            border-width: 2px;
-            height:407px;
-*/
-                display: none;
-            }
-            button.accordion {
-                /*            background-color: #11233F;*/
-                background-color: #273754;
-                /*            background-color: #FFFFFF;*/
-                /*            color: #566784;*/
-                color: aliceblue;
-                cursor: pointer;
-                padding: 18px;
-                width: 100%;
-                border: none;
-                text-align: left;
-                outline: none;
-                font-size: 15px;
-                transition: 0.4s;
-                height: 83px;
-                border-bottom-style: solid;
-                border-width: 1px;
-                border-color: #263752;
-            }
-            button.accordion.active {
-                background-color: #FFFFFF;
-                color: #3BAEE0;
-            }
-            button.accordion:hover {
-                //background-color: #FFFFFF;
-                color: #8FD1ED;
-            }
-            div.dropdown-panel {
-                padding: 0 18px;
-                /*            padding: 0 1px;*/
-                background-color: #071831;
-                max-height: 0px;
-                overflow: hidden;
-                transition: max-height 0.2s ease-out;
-                color: aliceblue
-            }
-        }
-
-        .menu {
-            position: absolute;
-            /* top: 50%; */
-            left: 50%;
-            /* right: 30%; */
-            transform: translate(-50%);
-        }
-
-        /*Text*/
-
-        h2.title {
-            /*        font-family: 'Rozha One', serif;*/
-            font-family: 'Orbitron-Black';
-            /*        font-family: 'Russo One', sans-serif;*/
-            color: aliceblue;
-            font-size: 50px;
-        }
-    </style>
-    <link rel="stylesheet" type="text/css" href="../public/css/nav_bar.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/user.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/food.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/searchbar.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/flex-box-textbook-course.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/nav_bar.css" />
 
 </head>
 
@@ -102,6 +20,65 @@
 <!--<body>-->
 
 <body bgcolor="#12233F" style="text-align: center">
+    <header>
+        <div class="user-button" id="login-button">
+            <img src="https://dqcgrsy5v35b9.cloudfront.net/cruiseplanner/assets/img/icons/login-w-icon.png">
+            </img>
+        </div>
+
+        <div class="user-button" id="register-button">
+            <img src="https://dqcgrsy5v35b9.cloudfront.net/cruiseplanner/assets/img/icons/login-w-icon.png">
+            </img>
+        </div>
+
+    </header>
+
+    <div class='container' id="container-login">
+        <h1>Log In</h1>
+        <span class="close-btn">
+            <img src="https://cdn4.iconfinder.com/data/icons/miu/22/circle_close_delete_-128.png"></img>
+        </span>
+
+        <form>
+            <input id='login-username' type="text" name="username" placeholder="Username">
+            <input id='login-password' type="password" name="pass" placeholder="Password">
+            <a href="#" id='login-a'>Log in</a>
+            <div id="remember-container">
+                <input type="checkbox" id="checkbox-2-1" class="checkbox" checked="checked" />
+                <span id="remember">Remember me</span>
+                <span id="forgotten">Forgotten password</span>
+            </div>
+        </form>
+    </div>
+
+    <div class='container' id="container-register">
+        <h1>Register</h1>
+        <span class="close-btn">
+            <img src="https://cdn4.iconfinder.com/data/icons/miu/22/circle_close_delete_-128.png"></img>
+        </span>
+
+        <form>
+            <input id='register-username' type="email" name="username" placeholder="Username">
+            <input id='register-password' type="password" name="pass" placeholder="Password">
+            <input id='register-repassword' type="repassword" name="repass" placeholder="Re-Password">
+            <a href="#" id='register-a'>Register</a>
+        </form>
+    </div>
+
+
+
+    <!-- Forgotten Password Container -->
+    <div id="forgotten-container">
+        <h1>Forgotten</h1>
+        <span class="close-btn">
+            <img src="https://cdn4.iconfinder.com/data/icons/miu/22/circle_close_delete_-128.png"></img>
+        </span>
+
+        <form>
+            <input type="email" name="email" placeholder="E-mail">
+            <a href="#" class="orange-btn">Get new password</a>
+        </form>
+    </div>
 
     <div class="menu">
         <h2 class="title">UofT Helper</h2>
