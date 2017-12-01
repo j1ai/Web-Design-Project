@@ -20,7 +20,7 @@
 <!--<body>-->
 
 <body bgcolor="#12233F" style="text-align: center">
-    <header>
+    <nav>
         <div class="user-button" id="login-button">
             <img src="https://dqcgrsy5v35b9.cloudfront.net/cruiseplanner/assets/img/icons/login-w-icon.png">
             </img>
@@ -31,7 +31,7 @@
             </img>
         </div>
 
-    </header>
+    </nav>
 
     <div class='container' id="container-login">
         <h1>Log In</h1>
@@ -149,9 +149,13 @@
     </div>
 </body>
 
+<!-- Ref -->
 <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.16.1/TweenMax.min.js'></script>
 <script src='/public/js/jquery-3.2.1.min.js'></script>
 <script src='/public/js/jquery-ui.min.js'></script>
+<script src='/public/js/notify.js'></script>
+
+<!-- Customize -->
 <script src='/public/js/main.js'></script>
 <script src="/public/js/user.js"></script>
 
@@ -161,5 +165,24 @@
 <script src='/public/js/lodash.core.js'></script>
 <script type="text/javascript" async defer src="http://maps.googleapis.com/maps/api/js?&key=AIzaSyAcCQUysA9ta6bOvWOUxTyPdsXx40X9jkw&callback=initialize"></script>
 
+<!-- Websocket | socket.io -->
+<script src="/socket.io/socket.io.js"></script>
+<script type="text/javascript">
+$(function() {
+    // $.notify("Hello World");
+    var socket = io();
+    // $('form').submit(function(){
+    //   socket.emit('chat message', $('#m').val());
+    //   $('#m').val('');
+    //   return false;
+    // });
+    socket.on('message', function(msg) {
+        console.log(msg)
+        $.notify(msg, 'info')
+        // $('#content').text('收到消息：'+msg);
+        // $('.notification.sticky').notify();
+    });
+});
+</script>
 
 </html>

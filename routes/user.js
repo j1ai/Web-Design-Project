@@ -4,10 +4,6 @@ const request = require('request')
 const User = require('../models/User');
 
 
-
-
-
-
 // Use mongoose
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;

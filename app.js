@@ -1,16 +1,49 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
-const router = require('./routes/route')
-const router_user = require('./routes/user')
-const router_location = require('./routes/location')
 const swig = require('swig');
 const opn = require('opn');
 const bodyParser = require('body-parser');
 const moment = require('moment')
 const session = require('express-session')
 
+
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Websocket - socket.io
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+
+
+io.on('connection', function(socket){
+  console.log('A User Connected '+socket.id);
+  socket.on('disconnect', function(){
+    console.log('A User Disconnected');
+  });
+  socket.emit('message','Hello');
+});
+
+app.get('/getid', function(req, res){
+    var content = req.query.content || 'none';
+    console.log('socketid: '+socket.id);
+
+    // io.sockets.emit('message',content)
+    return res.send('socketid: '+socket.id);
+})
+
+app.get('/sendMsg', function(req, res){
+    var content = req.query.content || 'none';
+    io.sockets.emit('message',content)
+    return res.send({code:200,msg:'发送成功'});
+})
+
+// Router
+const router = require('./routes/route')
+const router_message = require('./routes/message')
+const router_user = require('./routes/user')
+const router_location = require('./routes/location')
+
+
 
 // 在开发过程中，需要取消模板缓存
 swig.setDefaults({cache:false});
@@ -53,13 +86,6 @@ app.get('/',function(req, res) {
     res.render('index.html');
 });
 
-app.get('/dev',function(req, res) {
-    // res.send('<h1>欢迎光临我的博客！</h1>');
-    // 第一个参数：表示模板文件，相对于view文件夹而言的index文件
-    // 第二个参数:传递个模板使用的数据
-    res.render('ws.html');
-});
-
 function myLogger(req, res, next) {
     // console.log(moment().format(), 'Log:', req.method, req.url, req.body)
     // console.log('Log:', req.method, req.url, req.body)
@@ -78,7 +104,9 @@ function myLogger(req, res, next) {
 app.use(myLogger)
 app.use('/location', router_location)
 app.use('/user', router_user)
+app.use('/api', router_message)
 app.use('/', router)
+
 
 
 
@@ -91,7 +119,7 @@ mongoose.connect('mongodb://localhost:27017/app',function (err) {
         console.log('DB Connect Error');
     }else{
         console.log('Db Connect Success');
-        app.listen(port);
+        server.listen(port);
         console.log('> Listening at ' + uri + '\n');
         // automatically open the url in the browser
         // opn(uri)
