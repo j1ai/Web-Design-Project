@@ -3,6 +3,11 @@ const router = express.Router()
 const request = require('request')
 const User = require('../models/User');
 
+
+
+
+
+
 // Use mongoose
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
@@ -48,6 +53,7 @@ router.get('/', function(req, res) {
     }
     res.render('user0.html');
 })
+
 
 
 // User register

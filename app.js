@@ -9,7 +9,6 @@ const bodyParser = require('body-parser');
 const moment = require('moment')
 const session = require('express-session')
 
-
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -54,6 +53,13 @@ app.get('/',function(req, res) {
     res.render('index.html');
 });
 
+app.get('/dev',function(req, res) {
+    // res.send('<h1>欢迎光临我的博客！</h1>');
+    // 第一个参数：表示模板文件，相对于view文件夹而言的index文件
+    // 第二个参数:传递个模板使用的数据
+    res.render('ws.html');
+});
+
 function myLogger(req, res, next) {
     // console.log(moment().format(), 'Log:', req.method, req.url, req.body)
     // console.log('Log:', req.method, req.url, req.body)
@@ -73,9 +79,6 @@ app.use(myLogger)
 app.use('/location', router_location)
 app.use('/user', router_user)
 app.use('/', router)
-
-
-
 
 
 

@@ -7,3 +7,15 @@ cd assignment-3-nan-nan
 mongod --dbpath=./db --port=27017
 3. Open the server
 node app.js
+
+
+
+# demo:
+Prof:
+-  curl -XPOST --data '{"data": 'message info'}' https://xxxx.com/api/message
+
+- show flow of the application
+- what is your rest api doing
+
+
+#test:
