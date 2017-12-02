@@ -136,10 +136,9 @@ router.post('/login',function (req,res) {
             req.session.isLogin = true;
             // req.session.test = 'test';
 
-            // res.cookie('userInfo',JSON.stringify({
-            //     _id: doc._id,
-            //     username: doc.username
-            // }), {signed:true})
+            res.cookie('userInfo',JSON.stringify({
+                username: doc.username
+            }))
 
             // res.cookie('Course',req.body.code, {signed:true})
 
@@ -161,9 +160,9 @@ router.post('/login',function (req,res) {
 router.get('/logout', function(req, res) {
     console.log('/logout router ok')
     req.session.destroy(function(){
-			// res.clearCookie();
+			res.clearCookie('userInfo');
 			// res.cookie("isLogin","false");
-			res.redirect("./");
+			res.redirect("/");
 		});
 })
 
