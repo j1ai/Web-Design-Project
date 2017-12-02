@@ -174,7 +174,8 @@ var third = function makeMarkers() {
 					        '<dd>' + "<Strong>"+ allList[i][0]+ "</Strong>" + '</dd>' +
 					        '<dd>' + "<Strong>Address: </Strong>" + allList[i][3] + '</dd>' +
 					        '<dd>' + allList[i][4]+ '</dd>' + 
-							  '<br /><input type = "button" value = "Delete" onclick = "DeleteMarker(' + marker.id + ');" value = "Delete" />' +        
+					        '<br /><input type = "button" value = "Add to Favourite" onclick = "FavMarker(' + marker.id + ');" value = "Add" />' +
+							  '<br /><input type = "button" value = "Remove From Favourite" onclick = "DeleteMarker(' + marker.id + ');" value = "Delete" />' +        
 					        +'</div>';
 					
 					        allList[i][6] = content;
@@ -205,22 +206,12 @@ var third = function makeMarkers() {
 	});
 	return promise;
 };
-	
-	
-	 function cleanMap(){
-	        demoCenter = new google.maps.LatLng(cityList[0][1],cityList[0][2]);
-	        map = new google.maps.Map(document.getElementById('map_canvas'), {
-	           zoom: 15,
-	           center: demoCenter,
-	           mapTypeId: google.maps.MapTypeId.ROADMAP
-	         });
-    }
 
 
 	function SearchMap() {	
 		var i;
 		var code = document.getElementById("mySearch").value;
-		for (i = buildstart+1; i < allList.length; i++){
+		for (i = buildstart; i < allList.length; i++){
 			 if (allList[i][8] == code){
 					marker = markers[i];
 					marker.setVisible(true);
@@ -233,17 +224,27 @@ var third = function makeMarkers() {
 	}
 
 	function DeleteMarker(id) {
+		  var check = checkfav(id);
+		  if (check != -1){
+				favList[check].setMap(null);
+				favList.splice(check, 1);
+				return;
+		  }
+    }
+    
+    function FavMarker(id) {
         //Find and remove the marker from the Array
-        for (var i = 0; i < markers.length; i++) {
-            if (markers[i].id == id) {
-                //Remove the marker from Map                  
-                markers[i].setMap(null);
- 
-                //Remove the marker from array.
-                markers.splice(i, 1);
-                return;
-            }
-        }
+        var check = checkfav(id);
+        if (check == -1){
+	        for (var i = 0; i < markers.length; i++) {
+	            if (markers[i].id == id) {                  
+	                //Remove the marker from array.
+	                favList.push(markers[i])
+	                return;
+	            }
+	        }
+	     }
+	     
     }
     
     function addParkMarkers() {
@@ -257,7 +258,10 @@ var third = function makeMarkers() {
 				marker.setVisible(true);    		
     		}
     		map.setZoom(16);
-			map.setCenter(cur_marker.getPosition());
+    		if (cur_marker){
+    			map.setCenter(cur_marker.getPosition());
+    		}
+			
     }
     
     function addFoodMarkers() {
@@ -271,7 +275,9 @@ var third = function makeMarkers() {
 				marker.setVisible(true);    		
     		}
     		map.setZoom(16);
-			map.setCenter(cur_marker.getPosition());
+			if (cur_marker){
+    			map.setCenter(cur_marker.getPosition());
+    		}
     }
     
     function clearmarkers() {
@@ -280,6 +286,15 @@ var third = function makeMarkers() {
 				marker = markers[i];
 				marker.setVisible(false);    		
     		}    
+    }
+    
+    function checkfav(id){
+    		for (var i = 0;i<favList.length;i++){
+    				if(favList[i].id == id){
+							return i;    				
+    				}
+    		}
+    		return -1;
     }
     
     
