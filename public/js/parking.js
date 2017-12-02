@@ -6,14 +6,14 @@ var demoCenter;
 var favList = [];
 var markers = [];
 var uid = 1;
-var parksize = 0;
-var foodstart;
-var buildstart;
 var cur_size = 0;
+var buildstart = 1;
 var allList = new Array(400);
 for (i=0; i <400; i++){
-    allList[i]=new Array(8);
+    allList[i]=new Array(9);
 }
+var tempList = [];
+var cur_marker;
 
 
 var first = function createMarkers(){
@@ -39,8 +39,6 @@ var first = function createMarkers(){
                 allList[i][5] = 'https://maps.google.com/mapfiles/kml/shapes/parking_lot_maps.png';
                 allList[i][7] = 'Parking';
                 cur_size + i;
-                parksize++;
-                foodstart++;
             })
         },
         error:function(jqXHR, textStatus, errorThrown){
@@ -97,11 +95,16 @@ var first = function createMarkers(){
                 allList[cur_size+i][3] = "No address given";
             }
             else{
-                allList[cur_size+i][3] = item.address;
+                allList[cur_size+i][3] += item.address.street;
+                allList[cur_size+i][3] += item.address.city;
+					 allList[cur_size+i][3] += item.address.province;
+					 allList[cur_size+i][3] += item.address.country;
+                allList[cur_size+i][3] += item.address.postal;
             }
             allList[cur_size+i][4] = item.campus;
             allList[cur_size+i][5] = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
 				allList[cur_size+i][7] = 'building';
+				allList[cur_size+i][8] = item.code;
             cur_size++;
         })
     },
@@ -127,8 +130,7 @@ function initialize(){
 			);
 }
 
-var second = function init(){
-		//setTimeout('',5000);		
+var second = function init(){	
 		var promise = new Promise(function (resolve,reject) {
 		$(window).on('load', function () {
         demoCenter = new google.maps.LatLng(43.66333,-79.40032);
@@ -138,7 +140,7 @@ var second = function init(){
            mapTypeId: google.maps.MapTypeId.ROADMAP
          });
          
-    });
+    	});
 		resolve();			
 	});
 		
@@ -147,7 +149,6 @@ var second = function init(){
 	}
 
 var third = function makeMarkers() {
-		 //setTimeout('',2000);
 		 var promise = new Promise(function (resolve,reject) {	    				    
 				    var marker, type,
 				    i,
@@ -156,8 +157,6 @@ var third = function makeMarkers() {
 				
 				    for (i = 0; i < allList.length; i++) 
 				    {  
-				    	
-				        
 				        marker = new google.maps.Marker({
 				            position: new google.maps.LatLng(allList[i][1], allList[i][2]),
 				            map: map,
@@ -179,16 +178,18 @@ var third = function makeMarkers() {
 					        +'</div>';
 					
 					        allList[i][6] = content;
+					        map.setZoom(16);
+					        map.setCenter(marker.getPosition());
+					        
 					        infowindow.setContent(content);
-				        		infowindow.open(map, marker);    
+				        	  infowindow.open(map, marker);    
 				        }
 				           
 				        })(marker, i));
 				        
 				        markers.push(marker);
 				        if (allList[i][7] == 'Parking'){
-								cityList.push(marker); 
-								       
+								cityList.push(marker);     
 				        }
 				        else if (allList[i][7] == 'food'){
 								foodList.push(marker);        
@@ -196,8 +197,7 @@ var third = function makeMarkers() {
 				        else if (allList[i][7] == 'building') {
 				        		buildList.push(marker);
 				    	  }
-				    	  //marker.setMap(map);
-				        marker.setVisible(true); 
+				        marker.setVisible(false); 
 					}
 					
 			resolve();
@@ -207,7 +207,7 @@ var third = function makeMarkers() {
 };
 	
 	
-	    function cleanMap(){
+	 function cleanMap(){
 	        demoCenter = new google.maps.LatLng(cityList[0][1],cityList[0][2]);
 	        map = new google.maps.Map(document.getElementById('map_canvas'), {
 	           zoom: 15,
@@ -216,42 +216,21 @@ var third = function makeMarkers() {
 	         });
     }
 
-    function SearchMap() {
-        var code = document.getElementById("mySearch").value;
-        var infowindow = new google.maps.InfoWindow();
 
-        for (i = 0; i < allList.length; i++) 
-        {  
-            if (allList[i][5] == code){
-
-                marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(buildList[i][1], buildList[i][2]),
-                    map: map,
-                    title: cityList[i][0],
-                    center: new google.maps.LatLng(buildList[i][1], buildList[i][2]),
-                    zoom: 17
-                });
-                map.setCenter(marker.getPosition());
-
-                var content = '<div class="panel" style="color:black" id="parking'+ i +'">' +
-                '<dd>' + "<Strong>"+ buildList[i][0]+ "</Strong>" + '</dd>' +
-                '<p>' + "<Strong>Address: </Strong>" + '<br />' +"Street:" +buildList[i][3][0] +
-                '<br />' +"City:" +buildList[i][3][1]+ 
-                '<br />' +"Postal Code:" +buildList[i][3][2]+'</p>' +
-                '<dd>' + buildList[i][4]+ '</dd>' + '</div>';
-
-                buildList[i][6] = content;
-
-                google.maps.event.addListener(marker, 'click', (function(marker, i) {
-                    return function() {
-
-                        infowindow.setContent(content);
-                        infowindow.open(map, marker);
-                    }
-                })(marker, i));
-            }
-        }
-}
+	function SearchMap() {	
+		var i;
+		var code = document.getElementById("mySearch").value;
+		for (i = buildstart+1; i < allList.length; i++){
+			 if (allList[i][8] == code){
+					marker = markers[i];
+					marker.setVisible(true);
+					map.setZoom(16);
+					map.setCenter(marker.getPosition());
+					tempList.push(marker);
+					cur_marker = marker;
+			 }
+		}			
+	}
 
 	function DeleteMarker(id) {
         //Find and remove the marker from the Array
@@ -269,18 +248,38 @@ var third = function makeMarkers() {
     
     function addParkMarkers() {
     		var i;
-    		for (i=0;i<parksize+1;i++){
-				marker = markers[i];
+    		for (i=0;i<cityList.length;i++){
+				marker = cityList[i];
 				marker.setVisible(true);    		
     		}
+    		for (i=0;i<tempList.length;i++){
+				marker = tempList[i];
+				marker.setVisible(true);    		
+    		}
+    		map.setZoom(16);
+			map.setCenter(cur_marker.getPosition());
     }
     
     function addFoodMarkers() {
     	  var i;
-    	  for (i=foodstart+1;i<buildstart+1;i++){
-				marker = markers[i];
+    	  for (i=0;i<foodList.length;i++){
+				marker = foodList[i];
 				marker.setVisible(true);    		
     		}
+    		for (i=0;i<tempList.length;i++){
+				marker = tempList[i];
+				marker.setVisible(true);    		
+    		}
+    		map.setZoom(16);
+			map.setCenter(cur_marker.getPosition());
+    }
+    
+    function clearmarkers() {
+		  var i;
+    	  for (i=0;i<markers.length;i++){
+				marker = markers[i];
+				marker.setVisible(false);    		
+    		}    
     }
     
     
@@ -288,14 +287,13 @@ var third = function makeMarkers() {
 
 $(document).on('click', '.add-park-markers', function(e) {
     e.preventDefault();
-    //cleanMap();
-	
+	 clearmarkers()
     addParkMarkers();
 });
 
 
 $(document).on('click', '.add-food-markers', function(e) {
     e.preventDefault();
-    //cleanMap();
+    clearmarkers();
     addFoodMarkers();
 });
