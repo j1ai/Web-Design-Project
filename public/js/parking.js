@@ -14,11 +14,14 @@ for (i=0; i <400; i++){
 }
 var tempList = [];
 var cur_marker;
+var cookie_val = $.cookie("userInfo").username
+
 
 
 var first = function createMarkers(){
 	
 	var promise = new Promise(function (resolve,reject) {
+
 
     $.ajax({
         type:'GET',
@@ -208,7 +211,10 @@ var third = function makeMarkers() {
 };
 
 
-	function SearchMap() {	
+
+	function SearchMap() {
+
+
 		var i;
 		var code = document.getElementById("mySearch").value;
 		for (i = buildstart; i < allList.length; i++){
