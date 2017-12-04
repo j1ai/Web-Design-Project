@@ -16,32 +16,12 @@ var responseData;
 router.use( function (req,res,next) {
     responseData = {
         code: 0,
-        message:''
+        message:'',
+        isAdmin: false
     };
     next();
 });
 
-
-
-
-// User Registe
-
-// 统一返回格式
-var responseData;
-
-router.use( function (req,res,next) {
-    responseData = {
-        code: 0,
-        message:''
-    };
-    next();
-});
-
-
-var user_db = {
-    'test': 'test',
-    'admin': 'admin'
-}
 
 router.get('/', function(req, res) {
     if(req.session.isLogin){
@@ -92,10 +72,17 @@ router.post('/register',function (req,res) {
             res.json(responseData);
             return;
         }
+        if(username=='admin'){
+            isAdmin = true
+        }
+        else{
+            isAdmin = false
+        }
         // Save to the Database
         var user = new User({
             username: username,
-            password: password
+            password: password,
+            isAdmin: isAdmin
         });
         user.save();
         responseData.code = 4;
@@ -131,6 +118,10 @@ router.post('/login',function (req,res) {
                 _id: doc._id,
                 username: doc.username
             };
+            console.log(doc)
+            if(doc.isAdmin){
+                responseData.isAdmin = true
+            }
 
             req.session.username = doc.username
             req.session.isLogin = true;
@@ -146,6 +137,7 @@ router.post('/login',function (req,res) {
             //     _id: doc._id,
             //     username: doc.username
             // }));
+            console.log(responseData)
             res.json(responseData);
             return
         }

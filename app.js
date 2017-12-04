@@ -15,12 +15,16 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
 
+var admin_db = {}
+
 io.on('connection', function(socket){
   console.log('A User Connected '+socket.id);
   socket.on('disconnect', function(){
     console.log('A User Disconnected');
   });
   socket.emit('message','Hello');
+  // 在这里传socket.id给前端，然后前端就可以获取id，然后登陆的时候就可以绑定到用户，这样就可以针对不同用户做不同的操作
+
 });
 
 app.get('/getid', function(req, res){
@@ -31,11 +35,9 @@ app.get('/getid', function(req, res){
     return res.send('socketid: '+socket.id);
 })
 
-app.get('/sendMsg', function(req, res){
-    var content = req.query.content || 'none';
-    io.sockets.emit('message',content)
-    return res.send({code:200,msg:'Message was successfully sent.'});
-})
+
+
+
 
 // Router
 const router = require('./routes/route')
@@ -96,15 +98,56 @@ function myLogger(req, res, next) {
     next()
 }
 
+
+
+const Message = require('./models/Message.js');
+
+// Get all message
+app.get('/api/messages', function(req, res){
+    Message.find({},function (err,msgs) {
+        console.log(msgs)
+        return res.send({code:200,msg:'Success', data:msgs});
+    })
+})
+
+// Post msg
+//curl -H "Content-Type: application/json" -XPOST --data '{ "data": "this is msg"}' http://127.0.0.1:3000/api/messages
+app.post('/api/messages', function(req, res){
+    console.log(req.body.data)
+
+    var content = req.body.data || 'none';
+
+    // save to db
+    var msg = new Message({
+        creat_data: Date.now(),
+        text: content
+    });
+    msg.save()
+
+    io.sockets.emit('message',content)
+    return res.send({code:200,msg:'Success'});
+})
+
+
+// curl -XDELETE  http://127.0.0.1:3000/api/messages/5a24d9658ae5f0df1e331db9
+app.delete('/api/messages/:id', function(req, res) {
+    console.log(req.params.id)
+    id = req.params.id
+        // delete msg in db
+    Message.findOneAndRemove(id, function (err,msg){
+        // console.log(msg)
+        return res.send({code:200,msg:'DELETE: Del Success'});
+    })
+})
+
+
 // middleware that is specific to this router
 app.use(myLogger)
 app.use('/location', router_location)
 app.use('/user', router_user)
 app.use('/favorites_course', router_favorite_course)
-app.use('/api', router_message)
+// app.use('/api', router_message)
 app.use('/', router)
-
-
 
 
 var port = 3000;

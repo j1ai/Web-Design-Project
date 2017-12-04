@@ -33,7 +33,7 @@ router.get('/', function(req, res) {
 })
 
 
-router.get('/messages', function(req, res) {
+router.get('/messages', function(req, res) {    
     console.log(req.query.data)
     responseData.code = 0
 
