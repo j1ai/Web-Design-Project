@@ -308,7 +308,7 @@ var third = function makeMarkers() {
 			var i,j;			
 			for (i=0;i<favid.length;i++){
 				  marker = markers[favid[i]];
-				  marker.setVisible(false);			
+				  marker.setVisible(true);			
 			}
     }
     
