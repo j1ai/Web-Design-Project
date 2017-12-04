@@ -6,15 +6,6 @@ const request = require('request')
 
 
 
-// define the home page route
-router.get('/add', function(req, res) {
-    res.send('Home page')
-})
-
-
-router.get('/about', function(req, res) {
-    res.send('About')
-})
 
 router.get('/textbook', function(req, res) {
     API_KEY = 'vXTvfn2nefMuprAfim9GP9kRBEU4aN0v'
@@ -31,8 +22,27 @@ router.use(express.static('public'))
 
 
 // RESTful Routes
+router.get('/textbook/:q', function(req, res) {
+    API_KEY = 'vXTvfn2nefMuprAfim9GP9kRBEU4aN0v'
+// https://cobalt.qas.im/api/1.0/textbooks/search?q='computer'&key=vXTvfn2nefMuprAfim9GP9kRBEU4aN0v
+    request.get('https://cobalt.qas.im/api/1.0/textbooks/search?q=' + req.params.q + '&key=' + API_KEY + '&limit=20', function(err, _res, body) {
+        data = JSON.parse(body)
+        res.send(data)
+        console.log(req.params.q)
+        console.log(req.params)
+    })
+})
 
 
+router.get('/courses/:q', function(req, res) {
+    API_KEY = 'vXTvfn2nefMuprAfim9GP9kRBEU4aN0v'
+    request.get('https://cobalt.qas.im/api/1.0/courses/search?q=' + req.params.q + '&key=' + API_KEY+ '&limit=20', function(err, _res, body) {
+        data = JSON.parse(body)
+        console.log(res)
+        console.log(data)
+        res.send(data)
+    })
+})
 
 
 // 404 Error Handler
