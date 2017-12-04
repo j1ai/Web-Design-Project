@@ -15,6 +15,7 @@ for (i=0; i <400; i++){
 var tempList = [];
 var cur_marker;
 var cookie_val = $.cookie("userInfo").username
+var favid = [];
 
 
 
@@ -213,12 +214,11 @@ var third = function makeMarkers() {
 
 
 	function SearchMap() {
-
-
 		var i;
 		var code = document.getElementById("mySearch").value;
 		for (i = buildstart; i < allList.length; i++){
 			 if (allList[i][8] == code){
+			 		console.log("yes")
 					marker = markers[i];
 					marker.setVisible(true);
 					map.setZoom(16);
@@ -246,6 +246,7 @@ var third = function makeMarkers() {
 	            if (markers[i].id == id) {                  
 	                //Remove the marker from array.
 	                favList.push(markers[i])
+	                favid.push(markers[i].id)
 	                return;
 	            }
 	        }
@@ -303,6 +304,14 @@ var third = function makeMarkers() {
     		return -1;
     }
     
+    function showfav () {			
+			var i,j;			
+			for (i=0;i<favid.length;i++){
+				  marker = markers[favid[i]];
+				  marker.setVisible(false);			
+			}
+    }
+    
     
 
 
@@ -310,6 +319,45 @@ $(document).on('click', '.add-park-markers', function(e) {
     e.preventDefault();
 	 clearmarkers()
     addParkMarkers();
+});
+
+$(document).on('click', '.save-fav-markers', function(e) {
+    e.preventDefault();
+	 $.ajax({
+            type:'POST',
+            url:'/location/savefavourite',
+            data:{
+                username: cookie_val,
+                markers:  favid
+            },
+            dataType:'json',
+            success:function (result) {
+                alert(result.message);
+                // 登录成功
+            }
+        })
+});
+
+$(document).on('click', '.show-fav-markers', function(e) {
+    e.preventDefault();
+	     $.ajax({
+        type:'GET',
+        url: '/location/getfavourite',
+        success:function(data){
+        			console.log(data.markers)
+					favid = data.markers
+        },
+        error:function(jqXHR, textStatus, errorThrown){
+            alert(jqXHR.responseText);
+            alert(jqXHR.status);
+            alert(jqXHR.readyState);
+            alert(jqXHR.statusText);
+            alert(textStatus);
+            alert(errorThrown);
+        }
+    });
+    clearmarkers()
+    showfav()
 });
 
 

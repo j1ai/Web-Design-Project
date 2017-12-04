@@ -1,7 +1,75 @@
 var express = require('express')
 const router = express.Router()
 const request = require('request')
+const User = require('../models/Map');
 
+// Use mongoose
+var mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
+
+// Same return format
+var responseData;
+
+router.use( function (req,res,next) {
+    responseData = {
+        code: 0,
+        message:''
+    };
+    next();
+});
+
+router.post('/savefavourite',function (req,res) {
+	 var username = req.body.username;
+    var markers = req.body.markers;
+	 // Determine Username has been registered or not
+	 if( username == ''){
+        responseData.code = 2;
+        responseData.message = 'Username cannot be empty';
+        res.json(responseData);
+        return;
+    }    
+    
+    User.findOne({
+        username:username
+    },function (err,doc) {
+    	  var user = new User({
+            username: username,
+            markers: markers
+        });
+        if(doc){
+            responseData.code = 3;
+            responseData.message = 'This User has stored Favourite Markers before. And new favourite list is updated now.';
+            user.save();
+            res.json(responseData);
+            return;
+        }
+        // Save to the Database
+        user.save();
+        responseData.code = 4;
+        responseData.message = 'Store new Data Success';
+        res.json(responseData);
+        return;
+    });
+});
+
+router.get('/getfavourite', function(req, res) {
+		var username = req.session.username;	
+		User.findOne({
+        	username:username
+    	},function (err,doc) {
+	        if(doc){
+	        		console.log(doc.markers)
+	            responseData.code = 4;
+	            responseData.message = 'Find User in database';
+	            responseData.userInfo = {
+						 username: doc.username,	                
+	                markers: doc.markers  
+	            };
+	            res.send(doc)
+	            return
+	        }
+	     })
+});
 
 // define the home page route
 router.get('/', function(req, res) {
