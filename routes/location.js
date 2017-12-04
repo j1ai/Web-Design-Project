@@ -40,9 +40,9 @@ router.post('/savefavourite',function (req,res) {
         if(doc){
             responseData.code = 3;
             responseData.message = 'This User has stored Favourite Markers before. And new favourite list is updated now.';
-            console.log(doc)
+            // console.log(doc)
             User.findOneAndUpdate({username:username}, {$set:{markers: markers}}, function(err, doc) {
-                console.log(doc)
+                // console.log(doc)
             })
             res.json(responseData);
             return;
@@ -64,7 +64,7 @@ router.get('/getfavourite', function(req, res) {
         	username:username
     	},function (err,doc) {
 	        if(doc){
-	        		console.log(doc.markers)
+	        		// console.log(doc.markers)
 	            responseData.code = 4;
 	            responseData.message = 'Find User in database';
 	            responseData.userInfo = {
