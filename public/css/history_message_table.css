@@ -1,0 +1,30 @@
+
+
+#history_message_table
+{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 12px;
+	background: #fff;
+	margin: 10px;
+	width: 430px;
+	border-collapse: collapse;
+	text-align: left;
+}
+#history_message_table th
+{
+	font-size: 14px;
+	font-weight: normal;
+	color: #D3E3FE;
+	background:#374D6D;
+	padding: 10px 8px;
+	border-bottom: 2px solid #374D6D;
+}
+#history_message_table td
+{
+	color: #91D2EC;
+	padding: 9px 8px 0px 8px;
+}
+#history_message_table tbody tr:hover td
+{
+	color: #374D6D;
+}

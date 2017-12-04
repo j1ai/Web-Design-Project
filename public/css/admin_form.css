@@ -108,3 +108,15 @@
     background: #3BACDD;
     color:#fff;
 }
+button#del_button, button#publish_message_button, button#delete_message_button{
+    background: #364D6F;
+    border: none;
+    padding: 10px 20px 10px 20px;
+    border-bottom: 3px solid #3BACDD;
+    border-radius: 3px;
+    color: #D2E2FF;
+}
+button#del_button:hover{
+    background: green;
+    border-bottom: 3px solid green;
+}

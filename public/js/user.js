@@ -21,8 +21,6 @@ $(function () {
 
 
     $('#login-a').click(function(){
-        // console.log($('#login-email').val())
-        // console.log($('#login-password').val())
         $.ajax({
             type:'POST',
             url:'/user/login',
@@ -33,12 +31,21 @@ $(function () {
             dataType:'json',
             success:function (result) {
                 alert(result.message);
-                // 登录成功
-                if(result.code == 4){
-                    loginBox.find('input').each(function () {
-                        $(this).val('');
-                    });
+
+                if(result.code == 4 &&result.isAdmin){
+
+                    $('#button-6').show();
+                    // $('#container-login').find('input').each(function (){
+                    //     $(this).val('');
+                    // });
+
+                    // show admin space when isAdmin = True
+
                 }
+                else if (!result.isAdmin){
+                    $('#button-6').hide();
+                }
+                $( ".close-btn" ).click();
             }
         })
     })
@@ -58,11 +65,12 @@ $(function () {
             dataType:'json',
             success:function (result) {
                 alert(result.message);
-                // 登录成功
+
                 if(result.code == 4){
-                    loginBox.find('input').each(function () {
+                    $('#container-register').find('input').each(function (){
                         $(this).val('');
                     });
+                    $( ".close-btn" ).click();
                 }
             }
         })

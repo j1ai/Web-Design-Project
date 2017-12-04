@@ -30,6 +30,14 @@ router.get('/', function(req, res) {
     res.render('user0.html');
 })
 
+router.get('/alluser', function(req, res) {
+
+    User.find({},function (err,doc) {
+                res.json(doc);
+                return;
+            }
+);
+});
 
 
 // User register

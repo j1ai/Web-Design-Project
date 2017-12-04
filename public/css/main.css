@@ -5,7 +5,7 @@
 
 @font-face {
     font-family: 'Orbitron-Black';
-    src: url('../public/fonts/Orbitron/Orbitron-Black.ttf');
+    src: url('../fonts/Orbitron/Orbitron-Black.ttf');
 }
 
 /*    mobile*/
@@ -16,14 +16,6 @@
         width: 480px;
     }
     div.diff-view {
-        /*
-    margin-left: 253px;
-    background-color:transparent;
-    border-left-style: solid;
-    border-color:#FFFFFF;
-    border-width: 2px;
-    height:407px;
-*/
         display: none;
     }
     button.accordion {

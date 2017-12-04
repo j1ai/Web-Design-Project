@@ -23,12 +23,45 @@ $(window).on('load resize',
 						if ($(this)[0].id == 'button-3' ) {
 							getFood();
 						}
+						else if ($(this)[0].id == 'button-0' ){
+							getHistoryMsg();
+						}
 					}
 				});
 			});
 	}
 );
-
+var sys_message_template = `
+<tr id = sys_msg_id666>
+<td class = 'table_del_time'>creat_date666</td>
+<td class = 'table_del_reason'>reason666</td>
+<td class = 'table_del_message'>message666</td>
+<td><input id= sys_msg_id667 name="to_be_del" type="radio"></td>
+</tr>
+`
+function getHistoryMsg(){
+	$.ajax({
+		type: "GET",
+		url: "http://127.0.0.1:3000/api/messages/",
+		contentType: "application/json",
+		dataType: "json",
+		success:function(res){
+			// message_list = JSON.stringify(res.data);
+			message_list = res.data;
+			for (id in message_list){
+				cur_sys_message = message_list[id];
+				sys_message_html = sys_message_template.replace('creat_date666', JSON.stringify(cur_sys_message['creat_data'].substring(4,21)))
+													   .replace('sys_msg_id666', JSON.stringify(cur_sys_message['_id']))
+													   .replace('sys_msg_id667', JSON.stringify(cur_sys_message['_id']))
+													   .replace('reason666', JSON.stringify(cur_sys_message['reason']))
+													   .replace('message666', JSON.stringify(cur_sys_message['message']));
+				$('#history_message').append(sys_message_html);
+			}
+			$active_panel = $('.accordion.active').next();
+    		$active_panel.css('max-height', $active_panel.prop("scrollHeight") + "px");
+		}
+	});
+}
 function getIdx(data, course_code) {
 	for (var x in data) {
 		if (data[x]['courses'][0]['code'] == course_code) return x;

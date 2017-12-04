@@ -10,6 +10,8 @@
 
 
     <link rel="stylesheet" type="text/css" href="/public/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/del_msg_table.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/history_message_table.css" />
     <link rel="stylesheet" type="text/css" href="/public/css/admin_form.css" />
     <link rel="stylesheet" type="text/css" href="/public/css/user.css">
     <link rel="stylesheet" type="text/css" href="/public/css/save_favourite.css">
@@ -85,10 +87,25 @@
             <a href="#" class="orange-btn">Get new password</a>
         </form>
     </div>
+<!-- begin -->
 
+            <!-- end -->
     <div class="menu">
         <h2 class="title">UofT Helper</h2>
 
+        <button id="button-0" class="tobe-accordion">SYSTEM MESSAGE LOG</button>
+        <div id="dropdown-panel-0" class="dropdown-panel">
+            <p>System Messages are as followed:</p>
+            <table id = "history_message_table">
+            <thead>
+                <th>Time</th>
+                <th>Reason</th>
+                <th>Message</th>
+            </thead>
+            <tbody id = "history_message">
+            </tbody>
+            </table>
+        </div>
         <button id="button-1" class="tobe-accordion">COURSES</button>
         <div id="dropdown-panel-1" class="dropdown-panel">
             <!-- panel content starts -->
@@ -160,25 +177,52 @@
             <div class="fav_basket"></div>
         </div>
         <button id="button-6" style="display:none" class="tobe-accordion">ADMIN SPACE</button>
-        <div id="dropdown-panel-5" class="dropdown-panel">
+        <div id="dropdown-panel-6" class="dropdown-panel">
+            
+            <button  id="publish_message_button" style="margin: 30px;"  onclick ="hide_del_show_pub()">
+                Publish New Message
+            </button>
+            <button  id="delete_message_button" style=" margin: 30px;" onclick ="hide_pub_show_del()">
+                Delete Published Messages
+            </button>
+
+            <div id="publish_message_div" style="display:none">
             <p>Publish a message in here:</p>
-            <form class="form-style-7">
+            <form id = "pub_form"class="form-style-7">
             <ul>
             <li>
                 <label for="name">Enter A Reason</label>
-                <input type="text" name="name" maxlength="100">
+                <input id = "pub_reason" type="text" name="reason" maxlength="100">
                 <span>Enter the reason for sending system message.</span>
             </li>
             <li>
                 <label for="bio">Message</label>
-                <textarea name="bio" onkeyup="adjust_textarea(this)"></textarea>
+                <textarea id = "pub_message" name="message" onkeyup="adjust_textarea(this)"></textarea>
                 <span>Send message to all users.</span>
             </li>
             <li>
-                <input type="submit" value="Send" >
+                <input type="button" onclick= "publish_message()" value="Send">
             </li>
             </ul>
             </form>
+            </div>
+
+            <div id="delete_message_div" style="display:none">
+            <p>Delete a message in here:</p>
+            <table id = "delete_message_table">
+            <thead>
+                <th>Time</th>
+                <th>Reason</th>
+                <th>Message</th>
+                <th>Delete</th>
+            </thead>
+            <tbody id = "delete_message_list">
+            </tbody>
+            </table>
+            <button  id="del_button" style=" margin: 30px;" onclick ="msg_del()">
+                Delete
+            </button>
+            </div>
         </div>
     </div>
 </body>
@@ -198,8 +242,7 @@
 <script src='/public/js/parking.js'></script>
 <script src='/public/js/save_favourite.js'></script>
 <script src='/public/js/admin_form.js'></script>
-<script src='/public/js/search_course.js'></script>
-<script src='/public/js/search_textbook.js'></script>
+
 <script src='/public/js/lodash.core.js'></script>
 <script type="text/javascript" async defer src="http://maps.googleapis.com/maps/api/js?&key=AIzaSyAcCQUysA9ta6bOvWOUxTyPdsXx40X9jkw&callback=initialize"></script>
 

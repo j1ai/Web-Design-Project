@@ -1,18 +1,18 @@
-table {
+.foodBracket table {
     border-collapse: collapse;
     table-layout:fixed;
 }
-th {
+.foodBracket th {
     background-color: #afaeae;
     color: black;
 }
-td {
+.foodBracket td {
     background-color: #DFDFDF;
     border-spacing: 0 0px;
 }
-table, td, th {
+/*.foodBracket table, td, th {
     border: 1px solid black;
-}
+}*/
 .foodcontainer {
     color:  black;
   height: 200px;
