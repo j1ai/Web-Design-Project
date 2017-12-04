@@ -78,12 +78,12 @@ var first = function createMarkers(){
         })
     },
     error:function(jqXHR, textStatus,  errorThrown){
-        alert(jqXHR.responseText);
-        alert(jqXHR.status);
-        alert(jqXHR.readyState);
-        alert(jqXHR.statusText);
-        alert(textStatus);
-        alert(errorThrown);
+        // alert(jqXHR.responseText);
+        // alert(jqXHR.status);
+        // alert(jqXHR.readyState);
+        // alert(jqXHR.statusText);
+        // alert(textStatus);
+        // alert(errorThrown);
     		}
 	});
 
@@ -113,12 +113,12 @@ var first = function createMarkers(){
         })
     },
     error:function(jqXHR, textStatus, errorThrown){
-        alert(jqXHR.responseText);
-        alert(jqXHR.status);
-        alert(jqXHR.readyState);
-        alert(jqXHR.statusText);
-        alert(textStatus);
-        alert(errorThrown);
+        // alert(jqXHR.responseText);
+        // alert(jqXHR.status);
+        // alert(jqXHR.readyState);
+        // alert(jqXHR.statusText);
+        // alert(textStatus);
+        // alert(errorThrown);
     }
  });
 	resolve("finsih")
@@ -346,12 +346,12 @@ $(document).on('click', '.show-fav-markers', function(e) {
 					favid = data.markers
         },
         error:function(jqXHR, textStatus, errorThrown){
-            alert(jqXHR.responseText);
-            alert(jqXHR.status);
-            alert(jqXHR.readyState);
-            alert(jqXHR.statusText);
-            alert(textStatus);
-            alert(errorThrown);
+            // alert(jqXHR.responseText);
+            // alert(jqXHR.status);
+            // alert(jqXHR.readyState);
+            // alert(jqXHR.statusText);
+            // alert(textStatus);
+            // alert(errorThrown);
         }
     });
     clearmarkers()

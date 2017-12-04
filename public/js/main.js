@@ -77,8 +77,6 @@ $("#search-textbook").on('click', function(e){
                                   .replace('textbook_course_code666', textbook_data['code'])
                                   .replace('textbook_title666', textbook_data['title'])
                                   .replace(/^course_|,666$/, "N/A");
-                // console.lof(cur_course_html);
-                console.log(cur_textbook_html);
                 $('#search-result-div-2').append(cur_textbook_html);
                 $active_panel = $('.accordion.active').next();
                 $active_panel.css('max-height', $active_panel.prop("scrollHeight") + "px");
@@ -123,7 +121,6 @@ $("#search-course").on('click', function(e){
                                       .replace('course_id667', course_data['id'])
                                       .replace('course_desc666', course_data['description'])
                                       .replace(/^course_|,666$/, "N/A");
-                    // console.lof(cur_course_html);
                     $('#search-result-div-1').append(cur_course_html);
                     $active_panel = $('.accordion.active').next();
                     $active_panel.css('max-height', $active_panel.prop("scrollHeight") + "px");

@@ -19,7 +19,6 @@ router.get('/getFavoriteCourse/', function(req, res) {
         // console.log('cookie', req.cookies.myCookie);
         var login_username = JSON.parse(req.cookies.userInfo)['username'];
         Favorite_course.find({username:login_username}, function(error, data){
-            console.log(data);
             res.json(data);
         });
     }
