@@ -1,0 +1,33 @@
+div.list div {
+  cursor: pointer;
+}
+
+
+div.fav_button_class{
+  display:inline;
+  background-color: #3BACDD;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  width:150px;
+  border-radius: 2px;
+  padding: 7px 8px;
+  text-align: center;
+  font-family: Helvetica;
+  font-size: 14px;
+  line-height: 24px;
+  color: #ffffff;
+  font-weight: bold;
+  text-decoration:none;
+}
+
+
+div.fav_button_class.active{
+  background: #3BACDD;
+  -webkit-box-shadow: 0px 0px 3px 1px #c9cdd1;
+  -moz-box-shadow: 0px 0px 3px 1px #c9cdd1;
+  box-shadow: 0px 0px 3px 1px #c9cdd1;
+}
+
+div.fav_button_class.active i{
+  color:red;
+}

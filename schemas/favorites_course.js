@@ -1,7 +1,7 @@
 
 var mongoose = require('mongoose');
 
-// User table structure
+// favourite course table structure
 module.exports = new mongoose.Schema({
     username:String,
     course_code: String,

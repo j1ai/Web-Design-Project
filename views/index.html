@@ -3,13 +3,16 @@
 <head>
 
     <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
 
+
     <link rel="stylesheet" type="text/css" href="/public/css/main.css" />
     <link rel="stylesheet" type="text/css" href="/public/css/admin_form.css" />
     <link rel="stylesheet" type="text/css" href="/public/css/user.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/save_favourite.css">
     <link rel="stylesheet" type="text/css" href="/public/css/food.css" />
     <link rel="stylesheet" type="text/css" href="/public/css/searchbar.css" />
     <link rel="stylesheet" type="text/css" href="/public/css/flex-box-textbook-course.css">
@@ -50,7 +53,6 @@
             <div id="remember-container">
                 <input type="checkbox" id="checkbox-2-1" class="checkbox" checked="checked" />
                 <span id="remember">Remember me</span>
-                <span id="forgotten">Forgotten password</span>
             </div>
         </form>
     </div>
@@ -64,7 +66,7 @@
         <form>
             <input id='register-username' type="email" name="username" placeholder="Username">
             <input id='register-password' type="password" name="pass" placeholder="Password">
-            <input id='register-repassword' type="repassword" name="repass" placeholder="Re-Password">
+            <input id='register-repassword' type="password" name="repass" placeholder="Re-Password">
             <a href="#" id='register-a'>Register</a>
         </form>
     </div>
@@ -157,7 +159,7 @@
             <p>Your favourites</p>
             <div class="fav_basket"></div>
         </div>
-        <button id="button-6" class="tobe-accordion">ADMIN SPACE</button>
+        <button id="button-6" style="display:none" class="tobe-accordion">ADMIN SPACE</button>
         <div id="dropdown-panel-5" class="dropdown-panel">
             <p>Publish a message in here:</p>
             <form class="form-style-7">
@@ -173,7 +175,7 @@
                 <span>Send message to all users.</span>
             </li>
             <li>
-                <input id =type="submit" value="Send" >
+                <input type="submit" value="Send" >
             </li>
             </ul>
             </form>
@@ -194,6 +196,7 @@
 <script src="/public/js/user.js"></script>
 
 <script src='/public/js/parking.js'></script>
+<script src='/public/js/save_favourite.js'></script>
 <script src='/public/js/admin_form.js'></script>
 <script src='/public/js/search_course.js'></script>
 <script src='/public/js/search_textbook.js'></script>

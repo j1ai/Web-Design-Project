@@ -107,7 +107,7 @@ nav {
 
 /* Heading */
 
-.container-login, .container-register, .forgotten-container h1 {
+#container-login h1,#container-register h1 {
     font-family: 'Open Sans Condensed', sans-serif;
     position: relative;
     margin-top: 0px;
@@ -118,8 +118,7 @@ nav {
 }
 
 /* Inputs */
-
-.container-login, .container-register, .forgotten-container, a{
+a#register-a, a#login-a {
     font-family: 'Open Sans Condensed', sans-serif;
     text-decoration: none;
     position: relative;
@@ -135,9 +134,10 @@ nav {
     -webkit-transition: all 2s ease-in-out;
     -moz-transition: all 2s ease-in-out;
     -o-transition: all 2s ease-in-out;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out
 }
-.container-login, .container-register, .forgotten-container, input {
+input#register-username , input#register-password, input#register-repassword,
+input#login-username, input#login-password{
     font-family: 'Open Sans Condensed', sans-serif;
     text-decoration: none;
     position: relative;
@@ -159,7 +159,7 @@ nav {
 .container-login, .container-register, .forgotten-container input:focus {
     outline: none;
     box-shadow: 3px 3px 10px #333;
-    background: rgba(3, 3, 3, .18);
+    background: rgba(3, 3, 3, .1);
 }
 
 /* Placeholders */

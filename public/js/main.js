@@ -10,6 +10,8 @@ $(window).on('load resize',
 		$acc.each(
 			function() {
 				$(this).click(function() {
+					$('#detail-info-2').empty();
+					$('.foodBracket').empty();
 					$('.accordion.active').next().css('max-height', "0px");
 					$('.accordion.active').removeClass("active");
 					$(this).toggleClass("active");
@@ -18,7 +20,7 @@ $(window).on('load resize',
 						$panel.css('max-height', '0px');
 					} else {
 						$panel.css('max-height', $panel.prop("scrollHeight") + "px");
-						if ($(this)[0].id == 'button-3') {
+						if ($(this)[0].id == 'button-3' ) {
 							getFood();
 						}
 					}
@@ -45,6 +47,9 @@ function getCourseIdx(data, course_code) {
 var textbook_template =`
 <div style="float:left;">
 	<img class = "course_info" style="padding: 5px; float:left;" id = "course_img" src=src666 alt="textbook-img" width="100" height="130">
+	<div class="list">
+  		<div href="#" id="fav_button">Add to Favorites</a>
+	</div>
 	<div id = "detail-info-2" style="padding: 25px; float:right; width:250px;" >
 	<h4 class = "course_info" id = "course_id" style="vertical-align: top; width:230px; background-color: #526178; color:#11233E;border: 20px 100px 100px 100px; ">textbook_course_code666</h4>
 	<h5 class = "course_info" id = "course_detail" style="width:230px; word-wrap: break-word; text-align: left; color:#526178; border: 100px 100px 100px 100px;"><b>Title: </b>textbook_title666</h5>
@@ -85,11 +90,16 @@ $("#search-textbook").on('click', function(e){
 });
 
 var course_template = `
-<div id = "detail-info-1" style="float:right;" data_course_id = course_name666 ></div>
+<div id = "detail-info-1" style="float:left; width:100%" data_course_id = course_name666 >
+
 <h4 class = "course_info" id = "course_id" style="vertical-align: top; background-color: #526178; color:#11233E;border: 100px 100px 100px 100px; ">course_id666</h4>
-<h4>course_code666</h4>
+<h4 style = "width:50px float:left" class = "course_code" >course_code666</h4>
+<div style = "width:50px float:right" class="list">
+  <div href="#" id=course_id667  class = "fav_button_class" onclick = "addFavourite(this.id)">Add to Favorites <i class="fa fa-heart" aria-hidden="true"></i></a>
+</div>
 <h5 class = "course_info" id = "course_detail" style="color:#526178; text-align: left; border: 100px 100px 100px 100px;">Description: course_desc666</h5>
 <h4></h4>
+</div>
 `
 $("#search-course").on('click', function(e){
     
@@ -110,6 +120,7 @@ $("#search-course").on('click', function(e){
                     cur_course_html = course_template.replace('course_code666', course_data['code'])
                                       .replace('course_name666', course_data['name'])
                                       .replace('course_id666', course_data['id'])
+                                      .replace('course_id667', course_data['id'])
                                       .replace('course_desc666', course_data['description'])
                                       .replace(/^course_|,666$/, "N/A");
                     // console.lof(cur_course_html);

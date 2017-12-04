@@ -46,12 +46,12 @@ var first = function createMarkers(){
             })
         },
         error:function(jqXHR, textStatus, errorThrown){
-            alert(jqXHR.responseText);
-            alert(jqXHR.status);
-            alert(jqXHR.readyState);
-            alert(jqXHR.statusText);
-            alert(textStatus);
-            alert(errorThrown);
+            // alert(jqXHR.responseText);
+            // alert(jqXHR.status);
+            // alert(jqXHR.readyState);
+            // alert(jqXHR.statusText);
+            // alert(textStatus);
+            // alert(errorThrown);
         }
     });
 
@@ -218,7 +218,6 @@ var third = function makeMarkers() {
 		var code = document.getElementById("mySearch").value;
 		for (i = buildstart; i < allList.length; i++){
 			 if (allList[i][8] == code){
-			 		console.log("yes")
 					marker = markers[i];
 					marker.setVisible(true);
 					map.setZoom(16);
@@ -333,7 +332,6 @@ $(document).on('click', '.save-fav-markers', function(e) {
             dataType:'json',
             success:function (result) {
                 alert(result.message);
-                // 登录成功
             }
         })
 });
@@ -344,7 +342,6 @@ $(document).on('click', '.show-fav-markers', function(e) {
         type:'GET',
         url: '/location/getfavourite',
         success:function(data){
-        			console.log(data.markers)
 					favid = data.markers
         },
         error:function(jqXHR, textStatus, errorThrown){
