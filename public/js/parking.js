@@ -333,7 +333,7 @@ $(document).on('click', '.save-fav-markers', function(e) {
             dataType:'json',
             success:function (result) {
                 alert(result.message);
-                // 登录成功
+                // Successfully saved
             }
         })
 });
