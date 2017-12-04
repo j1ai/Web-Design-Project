@@ -71,7 +71,7 @@ var first = function createMarkers(){
                 allList[cur_size+i][3] = item.address;
             }
             allList[cur_size+i][4] = item.description;
-            allList[cur_size+i][5] = 'https://www.boozeat.com/themes/demo/assets/images/common/icon-extras.png';
+            allList[cur_size+i][5] = '/public/images/icon-extras.png';
 				allList[cur_size+i][7] = 'food';
             cur_size++;
             buildstart = cur_size;
@@ -171,6 +171,7 @@ var third = function makeMarkers() {
 						  marker.id = uid;
 				        uid ++;        
 				        
+                        $marker = marker;
 				        google.maps.event.addListener(marker, 'click', (function(marker, i) {
 				            return function() {
 				
@@ -191,6 +192,7 @@ var third = function makeMarkers() {
 				        }
 				           
 				        })(marker, i));
+
 				        
 				        markers.push(marker);
 				        if (allList[i][7] == 'Parking'){
@@ -314,13 +316,19 @@ var third = function makeMarkers() {
     
 
 
-$(document).on('click', '.add-park-markers', function(e) {
+// $(document).on('click', '.add-park-markers', function(e) {
+//     e.preventDefault();
+// 	 clearmarkers()
+//     addParkMarkers();
+// });
+
+$('.add-park-markers').on('click', function(e) {
     e.preventDefault();
-	 clearmarkers()
+     clearmarkers()
     addParkMarkers();
 });
 
-$(document).on('click', '.save-fav-markers', function(e) {
+$('.save-fav-markers').on('click', function(e) {
     e.preventDefault();
 	 $.ajax({
             type:'POST',
@@ -337,7 +345,7 @@ $(document).on('click', '.save-fav-markers', function(e) {
         })
 });
 
-$(document).on('click', '.show-fav-markers', function(e) {
+$('.show-fav-markers').on('click', function(e) {
     e.preventDefault();
 	     $.ajax({
         type:'GET',
@@ -359,7 +367,7 @@ $(document).on('click', '.show-fav-markers', function(e) {
 });
 
 
-$(document).on('click', '.add-food-markers', function(e) {
+$('.add-food-markers').on('click', function(e) {
     e.preventDefault();
     clearmarkers();
     addFoodMarkers();

@@ -108,7 +108,7 @@
     background: #3BACDD;
     color:#fff;
 }
-button#del_button, button#publish_message_button, button#delete_message_button{
+a#textbook_button, button#del_button, button#publish_message_button, button#delete_message_button{
     background: #364D6F;
     border: none;
     padding: 10px 20px 10px 20px;

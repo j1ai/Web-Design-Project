@@ -611,10 +611,10 @@
 
 	$(function() {
 		insertCSS(coreStyle.css).attr("id", "core-notify");
-		$(document).on("click", "." + pluginClassName + "-hidable", function(e) {
+		$("." + pluginClassName + "-hidable").on("click", function(e) {
 			$(this).trigger("notify-hide");
 		});
-		$(document).on("notify-hide", "." + pluginClassName + "-wrapper", function(e) {
+		$("notify-hide", "." + pluginClassName + "-wrapper").on(function(e) {
 			var elem = $(this).data(pluginClassName);
 			if(elem) {
 				elem.show(false);

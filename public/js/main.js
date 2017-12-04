@@ -26,6 +26,9 @@ $(window).on('load resize',
 						else if ($(this)[0].id == 'button-0' ){
 							getHistoryMsg();
 						}
+						else if ($(this)[0].id == 'button-5' ){
+							show_favourite();
+						}
 					}
 				});
 			});
@@ -36,7 +39,6 @@ var sys_message_template = `
 <td class = 'table_del_time'>creat_date666</td>
 <td class = 'table_del_reason'>reason666</td>
 <td class = 'table_del_message'>message666</td>
-<td><input id= sys_msg_id667 name="to_be_del" type="radio"></td>
 </tr>
 `
 function getHistoryMsg(){
@@ -80,12 +82,10 @@ function getCourseIdx(data, course_code) {
 var textbook_template =`
 <div style="float:left;">
 	<img class = "course_info" style="padding: 5px; float:left;" id = "course_img" src=src666 alt="textbook-img" width="100" height="130">
-	<div class="list">
-  		<div href="#" id="fav_button">Add to Favorites</a>
-	</div>
+
 	<div id = "detail-info-2" style="padding: 25px; float:right; width:250px;" >
-	<h4 class = "course_info" id = "course_id" style="vertical-align: top; width:230px; background-color: #526178; color:#11233E;border: 20px 100px 100px 100px; ">textbook_course_code666</h4>
-	<h5 class = "course_info" id = "course_detail" style="width:230px; word-wrap: break-word; text-align: left; color:#526178; border: 100px 100px 100px 100px;"><b>Title: </b>textbook_title666</h5>
+	<h4 class = "course_info" id = "course_id" style="vertical-align: top; width:230px; background-color: #526178; color:#11233E;border: 20px 100px 100px 100px; ">textbook_title666</h4>
+	<a href= textbook_url666 class="textbook_button">View the Textbook</a>
 	<h4></h4>
 	</div>
 </div>
@@ -107,8 +107,8 @@ $("#search-textbook").on('click', function(e){
             for (cid in data){
                 textbook_data = data[cid];
                 cur_textbook_html = textbook_template.replace('src666', textbook_data['image'])
-                                  .replace('textbook_course_code666', textbook_data['code'])
                                   .replace('textbook_title666', textbook_data['title'])
+                                  .replace('textbook_url666', textbook_data['url'])
                                   .replace(/^course_|,666$/, "N/A");
                 $('#search-result-div-2').append(cur_textbook_html);
                 $active_panel = $('.accordion.active').next();
@@ -165,6 +165,7 @@ $("#search-course").on('click', function(e){
     }
         );
 });
+
 
 function getFood() {
 	$.ajax({

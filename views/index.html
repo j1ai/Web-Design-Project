@@ -12,6 +12,8 @@
     <link rel="stylesheet" type="text/css" href="/public/css/main.css" />
     <link rel="stylesheet" type="text/css" href="/public/css/del_msg_table.css" />
     <link rel="stylesheet" type="text/css" href="/public/css/history_message_table.css" />
+    
+    <link rel="stylesheet" type="text/css" href="/public/css/show_favourite.css" />
     <link rel="stylesheet" type="text/css" href="/public/css/admin_form.css" />
     <link rel="stylesheet" type="text/css" href="/public/css/user.css">
     <link rel="stylesheet" type="text/css" href="/public/css/save_favourite.css">
@@ -114,7 +116,7 @@
             <hr align="center" style="height:5px; width: 400px; border:none;  color:#FFFFFF; background-color:#354C71;">
             <h5>Enter your course code and search for the time, professor of this course.</h5>
             <!--        <form class = "search-bar" action="#">-->
-            <input id="search-input-1" class="search-bar button-1" type="text" placeholder="e.g.: ANT370H5F">
+            <input id="search-input-1" class="search-bar button-1" type="text" placeholder="e.g.: CSC">
             <button id="search-course" class="search-bar">
               SEARCH
             </button>
@@ -136,7 +138,7 @@
             <hr align="center" style="height:5px; width: 400px; border:none;  color:#FFFFFF; background-color:#354C71;">
             <h5>Enter your course code and search for the textbook of this course.</h5>
             <!--        <form class = "search-bar" action="#">-->
-            <input id="search-input-2" class="search-bar button-2" type="text" placeholder="e.g.: ENG418H1F">
+            <input id="search-input-2" class="search-bar button-2" type="text" placeholder="e.g.: computing">
             <button id="search-textbook" class="search-bar" type="submit">
               SEARCH
             </button>
@@ -166,15 +168,17 @@
                 <button onclick="SearchMap()">Try it</button>
 
                 <p id="searchbuilding"></p>
-                <a onMouseOver="this.style.color='#3BAEE0'" onMouseOut="this.style.color='white'" style="color:white" href="#" class="save-fav-markers">Save Favourite List</a>
-                <a onMouseOver="this.style.color='#3BAEE0'" onMouseOut="this.style.color='white'" style="color:white" href="#" class="show-fav-markers">Show Favourite List</a>
+<!--                 <a onMouseOver="this.style.color='#3BAEE0'" onMouseOut="this.style.color='white'" style="color:white" href="#" class="save-fav-markers">Save Favourite List</a>
+                <a onMouseOver="this.style.color='#3BAEE0'" onMouseOut="this.style.color='white'" style="color:white" href="#" class="show-fav-markers">Show Favourite List</a> -->
                 <div id="map_canvas" style="height:400px;  width:500px; border-color: #354C71;"></div>
             </div>
         </div>
-        <button id="button-5" class="tobe-accordion">MY FAVOURITES</button>
+        <button id="button-5" class="tobe-accordion">MY FAVOURITES COURSES</button>
         <div id="dropdown-panel-5" class="dropdown-panel">
-            <p>Your favourites</p>
-            <div class="fav_basket"></div>
+            <div class="fav_basket">
+                <ul id = "list_to_append" class = "cartWrap">
+                </ul>
+            </div>
         </div>
         <button id="button-6" style="display:none" class="tobe-accordion">ADMIN SPACE</button>
         <div id="dropdown-panel-6" class="dropdown-panel">
@@ -238,7 +242,7 @@
 <!-- Customize -->
 <script src='/public/js/main.js'></script>
 <script src="/public/js/user.js"></script>
-
+<script src='/public/js/show_favourite.js'></script>
 <script src='/public/js/parking.js'></script>
 <script src='/public/js/save_favourite.js'></script>
 <script src='/public/js/admin_form.js'></script>

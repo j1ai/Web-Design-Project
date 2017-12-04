@@ -32,6 +32,7 @@ var sys_message_template = `
 <td class = 'table_del_time'>creat_date666</td>
 <td class = 'table_del_reason'>reason666</td>
 <td class = 'table_del_message'>message666</td>
+<td><input  type="radio" name= "del_message_radio" id = sys_msg_id667></input></td>
 </tr>
 `
 function hide_pub_show_del(){
@@ -51,6 +52,7 @@ function hide_pub_show_del(){
 
 				sys_message_html = sys_message_template.replace('creat_date666', JSON.stringify(cur_sys_message['creat_data'].substring(4,21)))
 													   .replace('sys_msg_id666', JSON.stringify(cur_sys_message['_id']))
+													   .replace('sys_msg_id667', JSON.stringify(cur_sys_message['_id']))
 													   .replace('reason666', JSON.stringify(cur_sys_message['reason']))
 													   .replace('message666', JSON.stringify(cur_sys_message['message']));
 				$('#delete_message_list').append(sys_message_html);

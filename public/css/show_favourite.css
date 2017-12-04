@@ -1,0 +1,75 @@
+.items .infoWrap {
+    display: table;
+    width: 100%;
+}
+
+.items .cartSection {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.items .cartSection .itemImg {
+    width: 8em;
+    display: inline;
+    padding-right: 1em;
+}
+
+.items .cartSection .itemImg {
+    width: 4em;
+    float: left;
+}
+
+.items .cartSection .itemNumber {
+    font-size: .75em;
+    color: #777;
+    margin-bottom: .5em;
+}
+.items .cartSection h3 {
+    font-size: 1em;
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: .025em;
+}
+
+.items .cartSection p {
+    display: inline-block;
+    font-size: .85em;
+    color: #777777;
+    text-align: left;
+    width:270px;
+    padding:20px;
+}
+
+.items .cartSection input.qty {
+    width: 2em;
+    text-align: center;
+    font-size: 1em;
+    padding: .25em;
+    margin: 1em .5em 0 0;
+}
+
+.items .cartSection.qtyWrap, .cart .items .cartSection.prodTotal {
+    text-align: center;
+}
+
+.items .cartSection {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+
+.items .cartSection.qtyWrap p, .cart .items .cartSection.prodTotal p {
+    font-weight: bold;
+    font-size: 1.25em;
+    text-align: right;
+}
+.items .cartSection {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+
+ul {
+  list-style-type: none;
+}
