@@ -34,18 +34,19 @@ app.get('/getid', function(req, res){
 app.get('/sendMsg', function(req, res){
     var content = req.query.content || 'none';
     io.sockets.emit('message',content)
-    return res.send({code:200,msg:'发送成功'});
+    return res.send({code:200,msg:'Message was successfully sent.'});
 })
 
 // Router
 const router = require('./routes/route')
 const router_message = require('./routes/message')
 const router_user = require('./routes/user')
+const router_favorite_course = require('./routes/favorites_course')
 const router_location = require('./routes/location')
 
 
 
-// 在开发过程中，需要取消模板缓存
+//cancel template cache during development
 swig.setDefaults({cache:false});
 
 // Serving static files
@@ -80,17 +81,12 @@ var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 app.get('/',function(req, res) {
-    // res.send('<h1>欢迎光临我的博客！</h1>');
-    // 第一个参数：表示模板文件，相对于view文件夹而言的index文件
-    // 第二个参数:传递个模板使用的数据
     res.render('index.html');
 });
 
 function myLogger(req, res, next) {
-    // console.log(moment().format(), 'Log:', req.method, req.url, req.body)
-    // console.log('Log:', req.method, req.url, req.body)
-    // console.log("Raw Cookies: ",req.headers.cookie)
-    console.log("Cookie Parser: ",req.cookies)
+
+    console.log("Cookie Parser: ", req.cookies.userInfo);
     console.log("Signed Cookies: ",req.signedCookies)
     console.log("seesion: ",req.session)
     if (req.body) {
@@ -104,6 +100,7 @@ function myLogger(req, res, next) {
 app.use(myLogger)
 app.use('/location', router_location)
 app.use('/user', router_user)
+app.use('/favorites_course', router_favorite_course)
 app.use('/api', router_message)
 app.use('/', router)
 

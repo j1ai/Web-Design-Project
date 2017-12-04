@@ -107,7 +107,7 @@ nav {
 
 /* Heading */
 
-h1 {
+.container-login, .container-register, .forgotten-container h1 {
     font-family: 'Open Sans Condensed', sans-serif;
     position: relative;
     margin-top: 0px;
@@ -119,8 +119,25 @@ h1 {
 
 /* Inputs */
 
-a,
-input {
+.container-login, .container-register, .forgotten-container, a{
+    font-family: 'Open Sans Condensed', sans-serif;
+    text-decoration: none;
+    position: relative;
+    width: 80%;
+    display: block;
+    margin: 9px auto;
+    font-size: 17px;
+    color: #fff;
+    padding: 8px;
+    border-radius: 6px;
+    border: none;
+    background: rgba(3, 3, 3, .1);
+    -webkit-transition: all 2s ease-in-out;
+    -moz-transition: all 2s ease-in-out;
+    -o-transition: all 2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+.container-login, .container-register, .forgotten-container, input {
     font-family: 'Open Sans Condensed', sans-serif;
     text-decoration: none;
     position: relative;
@@ -139,7 +156,7 @@ input {
     transition: all 0.2s ease-in-out;
 }
 
-input:focus {
+.container-login, .container-register, .forgotten-container input:focus {
     outline: none;
     box-shadow: 3px 3px 10px #333;
     background: rgba(3, 3, 3, .18);

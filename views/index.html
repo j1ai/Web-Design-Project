@@ -8,6 +8,7 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
 
     <link rel="stylesheet" type="text/css" href="/public/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/admin_form.css" />
     <link rel="stylesheet" type="text/css" href="/public/css/user.css">
     <link rel="stylesheet" type="text/css" href="/public/css/food.css" />
     <link rel="stylesheet" type="text/css" href="/public/css/searchbar.css" />
@@ -22,8 +23,8 @@
 <body bgcolor="#12233F" style="text-align: center">
     <nav>
         <div class="user-button" id="login-button">
-            <img src="https://dqcgrsy5v35b9.cloudfront.net/cruiseplanner/assets/img/icons/login-w-icon.png">
-
+            <!-- <img src="https://dqcgrsy5v35b9.cloudfront.net/cruiseplanner/assets/img/icons/login-w-icon.png"> -->
+            <img src = "/public/images/login.svg">
             </img>
         </div>
 
@@ -151,6 +152,32 @@
                 <div id="map_canvas" style="height:400px;  width:500px; border-color: #354C71;"></div>
             </div>
         </div>
+        <button id="button-5" class="tobe-accordion">MY FAVOURITES</button>
+        <div id="dropdown-panel-5" class="dropdown-panel">
+            <p>Your favourites</p>
+            <div class="fav_basket"></div>
+        </div>
+        <button id="button-6" class="tobe-accordion">ADMIN SPACE</button>
+        <div id="dropdown-panel-5" class="dropdown-panel">
+            <p>Publish a message in here:</p>
+            <form class="form-style-7">
+            <ul>
+            <li>
+                <label for="name">Enter A Reason</label>
+                <input type="text" name="name" maxlength="100">
+                <span>Enter the reason for sending system message.</span>
+            </li>
+            <li>
+                <label for="bio">Message</label>
+                <textarea name="bio" onkeyup="adjust_textarea(this)"></textarea>
+                <span>Send message to all users.</span>
+            </li>
+            <li>
+                <input id =type="submit" value="Send" >
+            </li>
+            </ul>
+            </form>
+        </div>
     </div>
 </body>
 
@@ -167,6 +194,7 @@
 <script src="/public/js/user.js"></script>
 
 <script src='/public/js/parking.js'></script>
+<script src='/public/js/admin_form.js'></script>
 <script src='/public/js/search_course.js'></script>
 <script src='/public/js/search_textbook.js'></script>
 <script src='/public/js/lodash.core.js'></script>
@@ -176,7 +204,6 @@
 <script src="/socket.io/socket.io.js"></script>
 <script type="text/javascript">
 $(function() {
-    // $.notify("Hello World");
     var socket = io();
     // $('form').submit(function(){
     //   socket.emit('chat message', $('#m').val());
@@ -186,10 +213,11 @@ $(function() {
     socket.on('message', function(msg) {
         console.log(msg)
         $.notify(msg, 'info')
-        // $('#content').text('收到消息：'+msg);
-        // $('.notification.sticky').notify();
+
     });
 });
+
+
 </script>
 
 </html>

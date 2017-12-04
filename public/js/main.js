@@ -40,65 +40,89 @@ function getCourseIdx(data, course_code) {
 	}
 	return "Not Found";
 }
-$("#search-textbook").on('click', function(e) {
-	$.ajax({
-			type: 'GET',
-			url: 'http://127.0.0.1:3000/site/textbook',
-			dataType: 'json',
-			success: function(data) {
-				var textbook_data = data;
-				var course_code = $('#search-input-2')[0].value;
-				var idx = getIdx(textbook_data, course_code);
-				//                    "ENG418H1F"
-				//Append textbook data to div
-				var isbn = textbook_data[idx]['isbn'];
-				var image = textbook_data[idx]['image'];
-				var title = textbook_data[idx]['title'];
-				var bookstore_url = textbook_data[idx]['url'];
-				$('#search-result-div-2').empty();
-				$('#image-info-2').empty();
-				$('#detail-info-2').empty();
-				$('#search-result-div-2').append('<img class = "course_info" id = "course_img" src="' + image + '" alt="textbook-img" width="100" height="130"  >');
-				$('#search-result-div-2').append('<div id = "detail-info-2" style="float:right;" ></div>');
-				$('#detail-info-2').append('<h4 class = "course_info" id = "course_id" style="vertical-align: top; background-color: #526178; color:#11233E;border: 100px 100px 100px 100px; ">' + course_code + '</h4>');
-				$('#detail-info-2').append('<h5 class = "course_info" id = "course_detail" style="  text-align: left; color:#526178; border: 100px 100px 100px 100px;">' + '<b>Title: </b>' + title + '</h5>');
-				$('#search-result-div-2').append('<h4></h4>');
-				$active_panel = $('.accordion.active').next();
-				$active_panel.css('max-height', $active_panel.prop("scrollHeight") + "px");
-			}
-		})
-		.catch(err => {
-			console.log(err);
-			alert('Failure of getting data');
-		})
+
+
+var textbook_template =`
+<div style="float:left;">
+	<img class = "course_info" style="padding: 5px; float:left;" id = "course_img" src=src666 alt="textbook-img" width="100" height="130">
+	<div id = "detail-info-2" style="padding: 25px; float:right; width:250px;" >
+	<h4 class = "course_info" id = "course_id" style="vertical-align: top; width:230px; background-color: #526178; color:#11233E;border: 20px 100px 100px 100px; ">textbook_course_code666</h4>
+	<h5 class = "course_info" id = "course_detail" style="width:230px; word-wrap: break-word; text-align: left; color:#526178; border: 100px 100px 100px 100px;"><b>Title: </b>textbook_title666</h5>
+	<h4></h4>
+	</div>
+</div>
+<h4></h4>
+<hr align="center" style="height:5px; width: 400px; border:none;  color:#FFFFFF; background-color:#354C71;">
+`
+
+$("#search-textbook").on('click', function(e){
+    
+    var textbook_search_q = $('#search-input-2')[0].value;
+
+    $('#search-result-div-2').empty();
+    $('#detail-info-2').empty();
+    $.ajax({
+        type: 'GET',
+        url: 'http://127.0.0.1:3000/textbook/'+textbook_search_q,
+        dataType: 'json',
+        success:function(data){
+            for (cid in data){
+                textbook_data = data[cid];
+                cur_textbook_html = textbook_template.replace('src666', textbook_data['image'])
+                                  .replace('textbook_course_code666', textbook_data['code'])
+                                  .replace('textbook_title666', textbook_data['title'])
+                                  .replace(/^course_|,666$/, "N/A");
+                // console.lof(cur_course_html);
+                console.log(cur_textbook_html);
+                $('#search-result-div-2').append(cur_textbook_html);
+                $active_panel = $('.accordion.active').next();
+                $active_panel.css('max-height', $active_panel.prop("scrollHeight") + "px");
+                
+            }
+        }
+    }
+        );
 });
-$("#search-course").on('click', function(e) {
-	$.ajax({
-			type: 'GET',
-			url: 'http://127.0.0.1:3000/site/course',
-			dataType: 'json',
-			success: function(data) {
-				var textbook_data = data;
-				var course_code = $('#search-input-1')[0].value;
-				var idx = getCourseIdx(textbook_data, course_code);
-				//                    ""ANT370H5F""
-				//Append textbook data to div
-				var name = textbook_data[idx]['name'];
-				var description = textbook_data[idx]['description'];
-				$('#search-result-div-1').empty();
-				$('#detail-info-1').empty();
-				$('#search-result-div-1').append('<div id = "detail-info-1" style="float:right;" ></div>');
-				$('#detail-info-1').append('<h4 class = "course_info" id = "course_id" style="vertical-align: top; background-color: #526178; color:#11233E;border: 100px 100px 100px 100px; ">' + name + '</h4>');
-				$('#detail-info-1').append('<h5 class = "course_info" id = "course_detail" style="  color:#526178; text-align: left; border: 100px 100px 100px 100px;">' + '<b>Description: </b>' + description + '</h5>');
-				$('#search-result-div-1').append('<h4></h4>');
-				$active_panel = $('.accordion.active').next();
-				$active_panel.css('max-height', $active_panel.prop("scrollHeight") + "px");
-			}
-		})
-		.catch(err => {
-			console.log(err);
-			alert('Failure of getting data');
-		})
+
+var course_template = `
+<div id = "detail-info-1" style="float:right;" data_course_id = course_name666 ></div>
+<h4 class = "course_info" id = "course_id" style="vertical-align: top; background-color: #526178; color:#11233E;border: 100px 100px 100px 100px; ">course_id666</h4>
+<h4>course_code666</h4>
+<h5 class = "course_info" id = "course_detail" style="color:#526178; text-align: left; border: 100px 100px 100px 100px;">Description: course_desc666</h5>
+<h4></h4>
+`
+$("#search-course").on('click', function(e){
+    
+    var course_search_q = $('#search-input-1')[0].value;
+
+    old_course_code = '';
+    $('#search-result-div-1').empty();
+    $('#detail-info-1').empty();
+    $.ajax({
+        type: 'GET',
+        url: 'http://127.0.0.1:3000/courses/'+course_search_q,
+        dataType: 'json',
+        success:function(data){
+            for (cid in data){
+                course_data = data[cid];
+                cur_course_code = course_data['code'].substring(0, 6);
+                if (cur_course_code!= old_course_code){
+                    cur_course_html = course_template.replace('course_code666', course_data['code'])
+                                      .replace('course_name666', course_data['name'])
+                                      .replace('course_id666', course_data['id'])
+                                      .replace('course_desc666', course_data['description'])
+                                      .replace(/^course_|,666$/, "N/A");
+                    // console.lof(cur_course_html);
+                    $('#search-result-div-1').append(cur_course_html);
+                    $active_panel = $('.accordion.active').next();
+                    $active_panel.css('max-height', $active_panel.prop("scrollHeight") + "px");
+                    old_course_code = cur_course_code;
+                }
+                
+            }
+        }
+    }
+        );
 });
 
 function getFood() {
