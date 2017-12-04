@@ -102,7 +102,7 @@ function myLogger(req, res, next) {
 
 const Message = require('./models/Message.js');
 
-
+// Get all message
 app.get('/api/messages', function(req, res){
     Message.find({},function (err,msgs) {
         console.log(msgs)
@@ -110,7 +110,8 @@ app.get('/api/messages', function(req, res){
     })
 })
 
-
+// Post msg
+//curl -H "Content-Type: application/json" -XPOST --data '{ "data": "this is msg"}' http://127.0.0.1:3000/api/messages
 app.post('/api/messages', function(req, res){
     console.log(req.body.data)
 
@@ -127,13 +128,16 @@ app.post('/api/messages', function(req, res){
     return res.send({code:200,msg:'Success'});
 })
 
-app.delete('/api/:msgid', function(req, res) {
-    console.log(req.params.msgid)
-    Message.find({ id:333 }).remove( callback );
-    // delete msg in db
-    responseData.message = 'DELETE: Del Success'
-    res.json(responseData);
-    return
+
+// curl -XDELETE  http://127.0.0.1:3000/api/messages/5a24d9658ae5f0df1e331db9
+app.delete('/api/messages/:id', function(req, res) {
+    console.log(req.params.id)
+    id = req.params.id
+        // delete msg in db
+    Message.findOneAndRemove(id, function (err,msg){
+        // console.log(msg)
+        return res.send({code:200,msg:'DELETE: Del Success'});
+    })
 })
 
 
