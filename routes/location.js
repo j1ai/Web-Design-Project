@@ -36,10 +36,14 @@ router.post('/savefavourite',function (req,res) {
             username: username,
             markers: markers
         });
+          console.log(user)
         if(doc){
             responseData.code = 3;
             responseData.message = 'This User has stored Favourite Markers before. And new favourite list is updated now.';
-            user.save();
+            console.log(doc)
+            User.findOneAndUpdate({username:username}, {$set:{markers: markers}}, function(err, doc) {
+                console.log(doc)
+            })
             res.json(responseData);
             return;
         }
@@ -53,7 +57,9 @@ router.post('/savefavourite',function (req,res) {
 });
 
 router.get('/getfavourite', function(req, res) {
-		var username = req.session.username;	
+		var username = req.session.username;
+        // console.log(req.session)
+
 		User.findOne({
         	username:username
     	},function (err,doc) {

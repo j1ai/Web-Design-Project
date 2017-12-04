@@ -308,7 +308,7 @@ var third = function makeMarkers() {
 			var i,j;			
 			for (i=0;i<favid.length;i++){
 				  marker = markers[favid[i]];
-				  marker.setVisible(false);			
+				  marker.setVisible(true);			
 			}
     }
     
@@ -333,7 +333,7 @@ $(document).on('click', '.save-fav-markers', function(e) {
             dataType:'json',
             success:function (result) {
                 alert(result.message);
-                // 登录成功
+                // Successfully saved
             }
         })
 });
