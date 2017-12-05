@@ -163,7 +163,7 @@ mongoose.connect(mongo_url,function (err) {
     }else{
         console.log('Db Connect Success');
         server.listen(port);
-        console.log('> Listening at ' + uri + '\n');
+        console.log('> Listening at ${port}: ' + uri + '\n');
         // automatically open the url in the browser
         // opn(uri)
     }
