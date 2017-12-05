@@ -6,5 +6,4 @@ module.exports = new mongoose.Schema({
     creat_data:String,
     message:String,
    	reason:String
-
 })
