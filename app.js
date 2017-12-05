@@ -162,8 +162,9 @@ mongoose.connect(mongo_url,function (err) {
         console.log('DB Connect Error');
     }else{
         console.log('Db Connect Success');
-        server.listen(port);
-        console.log('> Listening at ${port}: ' + uri + '\n');
+        server.listen(process.env.PORT || 3000, function(){
+          console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+        });;
         // automatically open the url in the browser
         // opn(uri)
     }
