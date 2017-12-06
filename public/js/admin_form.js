@@ -13,7 +13,7 @@ function publish_message(){
 			"reason": pub_reason}
 	$.ajax({
 		type: "POST",
-		url: window.location.hostname + window.location.port + "/api/messages/",
+		url: window.location.protocol+'//'+ $.grep([ window.location.hostname,window.location.port], Boolean).join(":") + "/api/messages/",
 		data: JSON.stringify(post_body),
 		contentType: "application/json",
 		dataType: "json",
@@ -41,7 +41,7 @@ function hide_pub_show_del(){
 	$('#delete_message_list').empty();
 	$.ajax({
 		type: "GET",
-		url: window.location.hostname + window.location.port + "/api/messages/",
+		url: window.location.protocol+'//'+ $.grep([ window.location.hostname,window.location.port], Boolean).join(":") + "/api/messages/",
 		contentType: "application/json",
 		dataType: "json",
 		success:function(res){
@@ -72,7 +72,7 @@ function msg_del(){
 		var del_msg_id = $('input:radio:checked')[0].id;
 		$.ajax({
 			type: "DELETE",
-			url: window.location.hostname + window.location.port + "/api/messages/"+del_msg_id,
+			url: window.location.protocol+'//'+ $.grep([ window.location.hostname,window.location.port], Boolean).join(":") + "/api/messages/"+del_msg_id,
 			success: function(result) {
         	alert('The message has been deleted');
         	hide_pub_show_del();
