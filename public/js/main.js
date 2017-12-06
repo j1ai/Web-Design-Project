@@ -44,7 +44,7 @@ var sys_message_template = `
 function getHistoryMsg(){
 	$.ajax({
 		type: "GET",
-		url: "http://127.0.0.1:3000/api/messages/",
+		url: window.location.hostname + window.location.port + "/api/messages/",
 		contentType: "application/json",
 		dataType: "json",
 		success:function(res){
@@ -101,7 +101,7 @@ $("#search-textbook").on('click', function(e){
     $('#detail-info-2').empty();
     $.ajax({
         type: 'GET',
-        url: 'http://127.0.0.1:3000/textbook/'+textbook_search_q,
+        url: window.location.hostname + window.location.port + '/textbook/'+textbook_search_q,
         dataType: 'json',
         success:function(data){
             for (cid in data){
@@ -141,7 +141,7 @@ $("#search-course").on('click', function(e){
     $('#detail-info-1').empty();
     $.ajax({
         type: 'GET',
-        url: 'http://127.0.0.1:3000/courses/'+course_search_q,
+        url: window.location.hostname + window.location.port + '/courses/'+course_search_q,
         dataType: 'json',
         success:function(data){
             for (cid in data){
@@ -170,7 +170,7 @@ $("#search-course").on('click', function(e){
 function getFood() {
 	$.ajax({
 		type: 'GET',
-		url: 'http://127.0.0.1:3000/location/food',
+		url: window.location.hostname + window.location.port + '/location/food',
 		success: function(data) {
 			// similar to enumerate in python
 			$('.foodBracket').empty();

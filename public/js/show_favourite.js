@@ -20,7 +20,7 @@ var favourite_template =`
 function show_favourite(){
   $.ajax({
     type: "GET",
-    url: "http://127.0.0.1:3000/favorites_course/getFavoriteCourse/",
+    url: window.location.hostname + window.location.port + "/favorites_course/getFavoriteCourse/",
     contentType: "application/json",
     dataType: "json",
     success:function(res){
