@@ -1,4 +1,5 @@
 //meida only
+
 $(window).on('load resize',
 	function() {
 		/* the viewport is less than 500 pixels wide */
@@ -44,7 +45,7 @@ var sys_message_template = `
 function getHistoryMsg(){
 	$.ajax({
 		type: "GET",
-		url: window.location.hostname + window.location.port + "/api/messages/",
+		url: $.grep([window.location.hostname,window.location.port], Boolean).join(":") + "/api/messages/",
 		contentType: "application/json",
 		dataType: "json",
 		success:function(res){
@@ -101,7 +102,7 @@ $("#search-textbook").on('click', function(e){
     $('#detail-info-2').empty();
     $.ajax({
         type: 'GET',
-        url: window.location.hostname + window.location.port + '/textbook/'+textbook_search_q,
+        url: $.grep([window.location.hostname,window.location.port], Boolean).join(":") + '/textbook/'+textbook_search_q,
         dataType: 'json',
         success:function(data){
             for (cid in data){
@@ -141,7 +142,7 @@ $("#search-course").on('click', function(e){
     $('#detail-info-1').empty();
     $.ajax({
         type: 'GET',
-        url: window.location.hostname + window.location.port + '/courses/'+course_search_q,
+        url: $.grep([window.location.hostname,window.location.port], Boolean).join(":") + '/courses/'+course_search_q,
         dataType: 'json',
         success:function(data){
             for (cid in data){
@@ -170,7 +171,7 @@ $("#search-course").on('click', function(e){
 function getFood() {
 	$.ajax({
 		type: 'GET',
-		url: window.location.hostname + window.location.port + '/location/food',
+		url: $.grep([window.location.hostname,window.location.port], Boolean).join(":") + '/location/food',
 		success: function(data) {
 			// similar to enumerate in python
 			$('.foodBracket').empty();
