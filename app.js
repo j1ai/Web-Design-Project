@@ -14,7 +14,6 @@ const PORT = process.env.PORT || 3000;
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
-
 var admin_db = {}
 
 io.on('connection', function(socket){
@@ -23,7 +22,6 @@ io.on('connection', function(socket){
     console.log('A User Disconnected');
   });
   // socket.emit('message','Hello');
-
 });
 
 app.get('/getid', function(req, res){
@@ -67,7 +65,7 @@ app.use(session({
   secret: "Haotian Yin's Key",
   resave: false,
   saveUninitialized: false,
-  cookie: {isLogin:false, maxAge:60*1000}
+  cookie: {isLogin:false, maxAge:5*60*1000}
 }));
 
 //  Bodyparse setting
@@ -81,21 +79,6 @@ app.use(cookieParser("Haotian Yin's Key"))
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
-app.get('/',function(req, res) {
-    res.render('index.html');
-});
-
-function myLogger(req, res, next) {
-
-    console.log("Cookie Parser: ", req.cookies.userInfo);
-    console.log("Signed Cookies: ",req.signedCookies)
-    console.log("seesion: ",req.session)
-    if (req.body) {
-        console.log(moment().format(), 'Log:', req.method, req.url, req.body)
-    }
-    // res.append('Set-Cookie', 'lastPage='+req.url);
-    next()
-}
 
 
 
@@ -143,13 +126,33 @@ app.delete('/api/messages/:id', function(req, res) {
 })
 
 
+
+function myLogger(req, res, next) {
+
+    console.log("Cookie Parser: ", req.cookies.userInfo);
+    console.log("Signed Cookies: ",req.signedCookies)
+    console.log("seesion: ",req.session)
+    if (req.body) {
+        console.log(moment().format(), 'Log:', req.method, req.url, req.body)
+    }
+    // res.append('Set-Cookie', 'lastPage='+req.url);
+    next()
+}
+
 // middleware that is specific to this router
 app.use(myLogger)
 app.use('/location', router_location)
 app.use('/user', router_user)
 app.use('/favorites_course', router_favorite_course)
 // app.use('/api', router_message)
+
+app.get('/',function(req, res) {
+    res.render('index.html');
+});
+
 app.use('/', router)
+
+
 
 
 var port = 3000;

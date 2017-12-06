@@ -150,7 +150,7 @@ router.post('/login',function (req,res) {
             return
         }
         responseData.code = 2;
-        responseData.message = 'User does not exist';
+        responseData.message = 'User or Passwords Wrong';
         res.json(responseData);
         return
     });
