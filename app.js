@@ -23,7 +23,6 @@ io.on('connection', function(socket){
     console.log('A User Disconnected');
   });
   socket.emit('message','Hello');
-  // 在这里传socket.id给前端，然后前端就可以获取id，然后登陆的时候就可以绑定到用户，这样就可以针对不同用户做不同的操作
 
 });
 
@@ -105,7 +104,7 @@ const Message = require('./models/Message.js');
 // Get all message
 app.get('/api/messages', function(req, res){
     Message.find({},function (err,msgs) {
-        console.log(msgs)
+        console.log(msgs);
         return res.send({code:200,msg:'Success', data:msgs});
     })
 })
@@ -115,16 +114,19 @@ app.get('/api/messages', function(req, res){
 app.post('/api/messages', function(req, res){
     console.log(req.body.data)
 
-    var content = req.body.data || 'none';
+    var message = req.body.message || 'none';
+    var reason = req.body.reason||'none';
+    var timestamp = new Date();
 
     // save to db
     var msg = new Message({
-        creat_data: Date.now(),
-        text: content
+        creat_data: timestamp.toString(),
+        message: message,
+        reason:reason,
     });
     msg.save()
 
-    io.sockets.emit('message',content)
+    io.sockets.emit('message',message)
     return res.send({code:200,msg:'Success'});
 })
 
@@ -134,7 +136,7 @@ app.delete('/api/messages/:id', function(req, res) {
     console.log(req.params.id)
     id = req.params.id
         // delete msg in db
-    Message.findOneAndRemove(id, function (err,msg){
+    Message.findOneAndRemove({'_id' : id}, function (err,msg){
         // console.log(msg)
         return res.send({code:200,msg:'DELETE: Del Success'});
     })
