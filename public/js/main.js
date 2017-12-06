@@ -35,7 +35,7 @@ $(window).on('load resize',
 			});
 	}
 );
-var sys_message_template = `
+var sys_message_template2 = `
 <tr id = sys_msg_id666>
 <td class = 'table_del_time'>creat_date666</td>
 <td class = 'table_del_reason'>reason666</td>
@@ -43,6 +43,7 @@ var sys_message_template = `
 </tr>
 `
 function getHistoryMsg(){
+	$('#history_message').empty();
 	$.ajax({
 		type: "GET",
 		url: window.location.protocol+'//'+ $.grep([ window.location.hostname,window.location.port], Boolean).join(":")+ "/api/messages/",
@@ -53,7 +54,7 @@ function getHistoryMsg(){
 			message_list = res.data;
 			for (id in message_list){
 				cur_sys_message = message_list[id];
-				sys_message_html = sys_message_template.replace('creat_date666', JSON.stringify(cur_sys_message['creat_data'].substring(4,21)))
+				sys_message_html = sys_message_template2.replace('creat_date666', JSON.stringify(cur_sys_message['creat_data'].substring(4,21)))
 													   .replace('sys_msg_id666', JSON.stringify(cur_sys_message['_id']))
 													   .replace('sys_msg_id667', JSON.stringify(cur_sys_message['_id']))
 													   .replace('reason666', JSON.stringify(cur_sys_message['reason']))
@@ -105,6 +106,9 @@ $("#search-textbook").on('click', function(e){
         url: window.location.protocol+'//'+ $.grep([ window.location.hostname,window.location.port], Boolean).join(":")+ '/textbook/'+textbook_search_q,
         dataType: 'json',
         success:function(data){
+        	if (data.length == 0){
+        		alert('No data found for ' + textbook_search_q + ', please try another keyword. e.g.: computing');
+        	}
             for (cid in data){
                 textbook_data = data[cid];
                 cur_textbook_html = textbook_template.replace('src666', textbook_data['image'])
@@ -145,21 +149,24 @@ $("#search-course").on('click', function(e){
         url: window.location.protocol+'//'+ $.grep([ window.location.hostname,window.location.port], Boolean).join(":") + '/courses/'+course_search_q,
         dataType: 'json',
         success:function(data){
+        	if (data.length == 0){
+        		alert('No data found for your course code ' + course_search_q + ', please try another keyword. e.g.: CSC148H5S');
+        	}
             for (cid in data){
                 course_data = data[cid];
                 cur_course_code = course_data['code'].substring(0, 6);
-                if (cur_course_code!= old_course_code){
-                    cur_course_html = course_template.replace('course_code666', course_data['code'])
-                                      .replace('course_name666', course_data['name'])
-                                      .replace('course_id666', course_data['id'])
-                                      .replace('course_id667', course_data['id'])
-                                      .replace('course_desc666', course_data['description'])
-                                      .replace(/^course_|,666$/, "N/A");
-                    $('#search-result-div-1').append(cur_course_html);
-                    $active_panel = $('.accordion.active').next();
-                    $active_panel.css('max-height', $active_panel.prop("scrollHeight") + "px");
-                    old_course_code = cur_course_code;
-                }
+                // if (cur_course_code!= old_course_code){
+                cur_course_html = course_template.replace('course_code666', course_data['code'])
+                                  .replace('course_name666', course_data['name'])
+                                  .replace('course_id666', course_data['id'])
+                                  .replace('course_id667', course_data['id'])
+                                  .replace('course_desc666', course_data['description'])
+                                  .replace(/^course_|,666$/, "N/A");
+                $('#search-result-div-1').append(cur_course_html);
+                $active_panel = $('.accordion.active').next();
+                $active_panel.css('max-height', $active_panel.prop("scrollHeight") + "px");
+                old_course_code = cur_course_code;
+                // }
                 
             }
         }

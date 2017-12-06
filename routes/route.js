@@ -25,7 +25,7 @@ router.use(express.static('public'))
 router.get('/textbook/:q', function(req, res) {
     API_KEY = 'vXTvfn2nefMuprAfim9GP9kRBEU4aN0v'
 // https://cobalt.qas.im/api/1.0/textbooks/search?q='computer'&key=vXTvfn2nefMuprAfim9GP9kRBEU4aN0v
-    request.get('https://cobalt.qas.im/api/1.0/textbooks/search?q=' + req.params.q + '&key=' + API_KEY + '&limit=20', function(err, _res, body) {
+    request.get('https://cobalt.qas.im/api/1.0/textbooks/search?q=' + req.params.q + '&key=' + API_KEY + '&limit=100', function(err, _res, body) {
         data = JSON.parse(body)
         res.send(data)
         console.log(req.params.q)
@@ -36,7 +36,7 @@ router.get('/textbook/:q', function(req, res) {
 
 router.get('/courses/:q', function(req, res) {
     API_KEY = 'vXTvfn2nefMuprAfim9GP9kRBEU4aN0v'
-    request.get('https://cobalt.qas.im/api/1.0/courses/search?q=' + req.params.q + '&key=' + API_KEY+ '&limit=20', function(err, _res, body) {
+    request.get('https://cobalt.qas.im/api/1.0/courses/search?q=' + req.params.q + '&key=' + API_KEY+ '&limit=100', function(err, _res, body) {
         data = JSON.parse(body)
         console.log(res)
         console.log(data)
