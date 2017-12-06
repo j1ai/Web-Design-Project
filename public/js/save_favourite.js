@@ -9,7 +9,7 @@ function addFavourite(course_id){
 		"course_desc":course_desc}
 	$.ajax({
 		type: "POST",
-		url: "http://127.0.0.1:3000/favorites_course/saveFavoriteCourse/",
+		url: window.location.hostname + window.location.port + "/favorites_course/saveFavoriteCourse/",
 		data: JSON.stringify(post_body),
 		contentType: "application/json",
 		dataType: "json",

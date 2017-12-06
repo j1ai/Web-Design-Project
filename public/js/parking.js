@@ -26,7 +26,7 @@ var first = function createMarkers(){
 
     $.ajax({
         type:'GET',
-        url: 'http://127.0.0.1:3000/location/parking',
+        url: window.location.hostname + window.location.port + '/location/parking',
         success:function(data){
             $.each(data,function(i,item){
                 allList[i][0] = item.title;
@@ -89,7 +89,7 @@ var first = function createMarkers(){
 
     $.ajax({
     type:'GET',
-    url: 'http://127.0.0.1:3000/location/building',
+    url: window.location.hostname + window.location.port + '/location/building',
     success:function(data){
         $.each(data,function(i,item){
             allList[cur_size+i][0] = item.name;
