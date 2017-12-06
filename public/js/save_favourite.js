@@ -9,7 +9,7 @@ function addFavourite(course_id){
 		"course_desc":course_desc}
 	$.ajax({
 		type: "POST",
-		url: $.grep([window.location.hostname,window.location.port], Boolean).join(":") + "/favorites_course/saveFavoriteCourse/",
+		url: window.location.protocol+'//'+ $.grep([ window.location.hostname,window.location.port], Boolean).join(":") + "/favorites_course/saveFavoriteCourse/",
 		data: JSON.stringify(post_body),
 		contentType: "application/json",
 		dataType: "json",

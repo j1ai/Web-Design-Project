@@ -20,7 +20,7 @@ var favourite_template =`
 function show_favourite(){
   $.ajax({
     type: "GET",
-    url: $.grep([window.location.hostname,window.location.port], Boolean).join(":") + "/favorites_course/getFavoriteCourse/",
+    url: window.location.protocol+'//'+ $.grep([ window.location.hostname,window.location.port], Boolean).join(":") + "/favorites_course/getFavoriteCourse/",
     contentType: "application/json",
     dataType: "json",
     success:function(res){

@@ -14,7 +14,7 @@ for (i=0; i <400; i++){
 }
 var tempList = [];
 var cur_marker;
-var cookie_val = $.cookie("userInfo").username
+// var cookie_val = $.cookie("userInfo").username
 var favid = [];
 
 
@@ -26,7 +26,7 @@ var first = function createMarkers(){
 
     $.ajax({
         type:'GET',
-        url: $.grep([window.location.hostname,window.location.port], Boolean).join(":") + '/location/parking',
+        url: window.location.protocol+'//'+ $.grep([ window.location.hostname,window.location.port], Boolean).join(":") + '/location/parking',
         success:function(data){
             $.each(data,function(i,item){
                 allList[i][0] = item.title;
@@ -89,7 +89,7 @@ var first = function createMarkers(){
 
     $.ajax({
     type:'GET',
-    url: $.grep([window.location.hostname,window.location.port], Boolean).join(":")+ '/location/building',
+    url: window.location.protocol+'//'+ $.grep([ window.location.hostname,window.location.port], Boolean).join(":")+ '/location/building',
     success:function(data){
         $.each(data,function(i,item){
             allList[cur_size+i][0] = item.name;
@@ -328,22 +328,22 @@ $('.add-park-markers').on('click', function(e) {
     addParkMarkers();
 });
 
-$('.save-fav-markers').on('click', function(e) {
-    e.preventDefault();
-	 $.ajax({
-            type:'POST',
-            url:'/location/savefavourite',
-            data:{
-                username: cookie_val,
-                markers:  favid
-            },
-            dataType:'json',
-            success:function (result) {
-                alert(result.message);
+// $('.save-fav-markers').on('click', function(e) {
+//     e.preventDefault();
+// 	 $.ajax({
+//             type:'POST',
+//             url:'/location/savefavourite',
+//             data:{
+//                 username: cookie_val,
+//                 markers:  favid
+//             },
+//             dataType:'json',
+//             success:function (result) {
+//                 alert(result.message);
 
-            }
-        })
-});
+//             }
+//         })
+// });
 
 $('.show-fav-markers').on('click', function(e) {
     e.preventDefault();
