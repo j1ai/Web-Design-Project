@@ -175,13 +175,18 @@ var third = function makeMarkers() {
 				        google.maps.event.addListener(marker, 'click', (function(marker, i) {
 				            return function() {
 				
-					        var content = '<div style="color:#071931" class="panel" id="everything'+ i +'">' +
-					        '<dd>' + "<Strong>"+ allList[i][0]+ "</Strong>" + '</dd>' +
-					        '<dd>' + "<Strong>Address: </Strong>" + allList[i][3] + '</dd>' +
-					        '<dd>' + allList[i][4]+ '</dd>' + 
-					        '<br /><input type = "button" value = "Add to Favourite" onclick = "FavMarker(' + marker.id + ');" value = "Add" />' +
-							  '<br /><input type = "button" value = "Remove From Favourite" onclick = "DeleteMarker(' + marker.id + ');" value = "Delete" />' +        
-					        +'</div>';
+					    //     var content = '<div style="color:#071931" class="panel" id="everything'+ i +'">' +
+					    //     '<dd>' + "<Strong>"+ allList[i][0]+ "</Strong>" + '</dd>' +
+					    //     '<dd>' + "<Strong>Address: </Strong>" + allList[i][3] + '</dd>' +
+					    //     '<dd>' + allList[i][4]+ '</dd>' + 
+					    //     '<br /><input type = "button" value = "Add to Favourite" onclick = "FavMarker(' + marker.id + ');" value = "Add" />' +
+							  // '<br /><input type = "button" value = "Remove From Favourite" onclick = "DeleteMarker(' + marker.id + ');" value = "Delete" />' +        
+					    //     +'</div>';
+                            var content = '<div style="color:#071931" class="panel" id="everything'+ i +'">' +
+                            '<dd>' + "<Strong>"+ allList[i][0]+ "</Strong>" + '</dd>' +
+                            '<dd>' + "<Strong>Address: </Strong>" + allList[i][3] + '</dd>' +
+                            '<dd>' + allList[i][4]+ '</dd>'       
+                            +'</div>';
 					
 					        allList[i][6] = content;
 					        map.setZoom(16);

@@ -136,7 +136,7 @@
             <h4>Textbook Finder</h4>
 
             <hr align="center" style="height:5px; width: 400px; border:none;  color:#FFFFFF; background-color:#354C71;">
-            <h5>Enter your course code and search for the textbook of this course.</h5>
+            <h5>Enter a keyword and search for related textbook.</h5>
             <!--        <form class = "search-bar" action="#">-->
             <input id="search-input-2" class="search-bar button-2" type="text" placeholder="e.g.: computing">
             <button id="search-textbook" class="search-bar" type="submit">
@@ -263,7 +263,9 @@ $(function() {
     socket.on('message', function(msg) {
         console.log(msg)
         $.notify(msg, 'info')
-
+        if ($('.accordion.active')[0] && $('.accordion.active')[0].id == 'button-0'){
+            getHistoryMsg();
+        }
     });
 });
 

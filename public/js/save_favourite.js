@@ -6,12 +6,22 @@ function addFavourite(course_id){
 	var post_body = {
 		"course_code": course_code,
 		"course_name":"",
-		"course_desc":course_desc}
+		"course_desc":course_desc,
+		"course_id":course_id}
+	// if $('#'+course_id+'.fav_button_class').
 	$.ajax({
 		type: "POST",
 		url: window.location.protocol+'//'+ $.grep([ window.location.hostname,window.location.port], Boolean).join(":") + "/favorites_course/saveFavoriteCourse/",
 		data: JSON.stringify(post_body),
 		contentType: "application/json",
 		dataType: "json",
+		success: function(data){
+			if (data.code && data.code != 4){
+				alert(data.message);
+			}
+			else {
+				alert('Saved successfully');
+			}
+		}
 	});
 }
