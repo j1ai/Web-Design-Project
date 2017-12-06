@@ -6,7 +6,7 @@ function adjust_textarea(h) {
 }
 
 function publish_message(){
-	
+
 	var pub_reason = $('#pub_reason').val();
 	var pub_message = $('#pub_message').val();
 	post_body = {"message": pub_message,
@@ -80,6 +80,3 @@ function msg_del(){
 		});
 	}
 }
-
-
-

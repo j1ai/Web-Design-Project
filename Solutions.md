@@ -20,6 +20,8 @@ Student 4: Lai Justin Ho Lam (1002213384)
 	when you are logged in as admin, you will see an extra view "Admin Space", otherwise you would not see it.
 
 
+
+
 # API
 GET /api/messages
     - Get all messages send from admin
